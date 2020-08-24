@@ -1,3 +1,8 @@
+import sys
+import os
+
+sys.path.insert(0, os.getcwd())
+
 import csv
 
 from domainmodel.movie import Movie
@@ -9,6 +14,10 @@ class MovieFileCSVReader:
 
     def __init__(self, file_name: str):
         self.__file_name = file_name
+        self.__dataset_of_movies = list()
+        self.__dataset_of_actors = list()
+        self.__dataset_of_directors = list()
+        self.__dataset_of_genres = list()
 
     def read_csv_file(self):
         with open(self.__file_name, mode='r', encoding='utf-8-sig') as csvfile:
@@ -18,5 +27,35 @@ class MovieFileCSVReader:
             for row in movie_file_reader:
                 title = row['Title']
                 release_year = int(row['Year'])
-                print(f"Movie {index} with title: {title}, release year {release_year}")
+
+                self.__dataset_of_movies.append(Movie(title, release_year))
+                
+                if Director(row['Director']) not in self.__dataset_of_directors:
+                    self.__dataset_of_directors.append(Director(row['Director']))
+
+                for actor in row['Actors'].split(','):
+                    if Actor(actor) not in self.dataset_of_actors:
+                        self.dataset_of_actors.append(Actor(actor))
+
+                for genre in row['Genre'].split(','):
+                    if Genre(genre) not in self.dataset_of_genres:
+                        self.dataset_of_genres.append(Genre(genre))
+
+                # print(f"Movie {index} with title: {title}, release year {release_year}")
                 index += 1
+
+    @property
+    def dataset_of_movies(self):
+        return self.__dataset_of_movies
+
+    @property
+    def dataset_of_actors(self):
+        return self.__dataset_of_actors
+
+    @property
+    def dataset_of_directors(self):
+        return self.__dataset_of_directors
+
+    @property
+    def dataset_of_genres(self):
+        return self.__dataset_of_genres
