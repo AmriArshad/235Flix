@@ -15,16 +15,17 @@ class Director:
         return f"<Director {self.__director_full_name}>"
 
     def __eq__(self, other):
-        # TODO
-        pass
-
+        if self.__director_full_name == other.__director_full_name:
+            return True
+        return False
+        
     def __lt__(self, other):
-        # TODO
-        pass
+        if self.__director_full_name < other.__director_full_name:
+            return True
+        return False
 
     def __hash__(self):
-        # TODO
-        pass
+        return hash(self.__director_full_name)
 
 
 class TestDirectorMethods:
