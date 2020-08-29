@@ -44,3 +44,17 @@ def test_rating(review):
 # def test_equal(review):
 #     assert (review == Review(Movie("Moana", 2016), "This movie was very enjoyable.", 8)) == True
 #     assert (review == Review(Movie("IT", 2017), "Ooo scaryyy", 10)) == False
+
+def test_votes(review):
+    assert review.votes == None
+    review.votes = "12321"
+    assert review.votes == None
+    review.votes = 118151
+    assert review.votes == 118151
+
+def test_metascore(review):
+    assert review.metascore == None
+    review.metascore = "N/A"
+    assert review.metascore == None
+    review.metascore = 81
+    assert review.metascore == 81

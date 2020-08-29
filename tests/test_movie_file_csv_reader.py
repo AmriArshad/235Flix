@@ -28,9 +28,7 @@ def test_movie():
     assert movie_file_reader.dataset_of_movies[0].description == "A group of intergalactic criminals are forced to work together to stop a fanatical warrior from taking control of the universe."
     assert repr(movie_file_reader.dataset_of_movies[0].director) == "<Director James Gunn>"
     assert repr(movie_file_reader.dataset_of_movies[0].actors) == "[<Actor Chris Pratt>, <Actor Vin Diesel>, <Actor Bradley Cooper>, <Actor Zoe Saldana>]"
-    assert movie_file_reader.dataset_of_movies[0].rating == 8.1
     assert movie_file_reader.dataset_of_movies[0].revenue == 333.13
-    assert movie_file_reader.dataset_of_movies[0].metascore == 76
 
     index = 0
     for movie in movie_file_reader.dataset_of_movies:
@@ -39,7 +37,5 @@ def test_movie():
         assert movie.description == movie_file_reader.dataset_of_movies[index].description
         assert repr(movie.director) == repr(movie_file_reader.dataset_of_movies[index].director)
         assert repr(movie.actors) == repr(movie_file_reader.dataset_of_movies[index].actors)
-        assert movie.rating == movie_file_reader.dataset_of_movies[index].rating
         assert movie.revenue == movie_file_reader.dataset_of_movies[index].revenue
-        assert movie.metascore == movie_file_reader.dataset_of_movies[index].metascore
         index += 1

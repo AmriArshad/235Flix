@@ -46,11 +46,9 @@ class MovieFileCSVReader:
                         self.dataset_of_genres.append(Genre(genre))
 
                 movie.runtime_minutes = int(row['Runtime (Minutes)'])
-                movie.rating = float(row['Rating'])
-                movie.votes = int(row['Votes'])
+                
                 try:
                     movie.revenue = float(row['Revenue (Millions)'])
-                    movie.metascore = int(row['Metascore'])
                 except:
                     pass
                 

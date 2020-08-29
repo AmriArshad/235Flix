@@ -21,11 +21,8 @@ class Movie:
         self.__actors: list[Actor] = list()
         self.__genres: list[Genre] = list()
         self.__runtime_minutes: int = 0
-        self.__rating: float = None
-        self.__votes: int = None
         self.__revenue: float = None #in millions
-        self.__metascore: int = None
-
+        
     @property
     def title(self) -> str:
         return self.__title
@@ -133,27 +130,6 @@ class Movie:
         return title + str(release_year)
 
     @property
-    def rating(self) -> float:
-        return self.__rating
-
-    @rating.setter
-    def rating(self, rating: float):
-        try:
-            if rating >= 0 and rating <= 10:
-                self.__rating = rating
-        except:
-            pass
-
-    @property
-    def votes(self) -> int:
-        return self.__votes
-
-    @votes.setter
-    def votes(self, votes: int):
-        if type(votes) == int and votes >= 0:
-            self.__votes = votes
-
-    @property
     def revenue(self) -> float:
         return self.__revenue
 
@@ -161,12 +137,3 @@ class Movie:
     def revenue(self, revenue: float):
         if type(revenue) == float and revenue >= 0:
             self.__revenue = revenue
-
-    @property
-    def metascore(self) -> int:
-        return self.__metascore
-
-    @metascore.setter
-    def metascore(self, metascore: int):
-        if type(metascore) == int and metascore >=0 and metascore <= 100:
-            self.__metascore = metascore

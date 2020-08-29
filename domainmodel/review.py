@@ -23,6 +23,8 @@ class Review:
             self.__rating = None
         
         self.__timestamp = datetime.today()
+        self.__votes: int = None
+        self.__metascore: int = None
         
     @property
     def movie(self):
@@ -47,3 +49,21 @@ class Review:
         if self.__movie == other.__movie and self.__review_text == other.__review_text and self.__rating == other.__rating and self.__timestamp == other.__timestamp:
             return True
         return False
+
+    @property
+    def votes(self) -> int:
+        return self.__votes
+
+    @votes.setter
+    def votes(self, votes: int):
+        if type(votes) == int and votes >= 0:
+            self.__votes = votes
+
+    @property
+    def metascore(self) -> int:
+        return self.__metascore
+
+    @metascore.setter
+    def metascore(self, metascore: int):
+        if type(metascore) == int and metascore >=0 and metascore <= 100:
+            self.__metascore = metascore
