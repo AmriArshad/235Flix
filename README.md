@@ -2,7 +2,8 @@
 The skeleton python project for the 2020 S2 CompSci 235 practical assignment CS235Flix.
 
 ## Setup
-Install virtual env and dependencies using requirements.txt
+Install virtual env and dependencies using requirements.txt.
+
 From root run in bash:
 ```shell
 python -m venv venv
