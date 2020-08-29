@@ -1,5 +1,5 @@
-# CS235FlixSkeleton
-The skeleton python project for the 2020 S2 CompSci 235 practical assignment CS235Flix.
+# CS235Flix
+2020 S2 CompSci 235 practical assignment CS235Flix.
 
 ## Setup
 Install virtual env and dependencies using requirements.txt.
@@ -26,9 +26,9 @@ Completed testing for these classes under /tests
 
 ### Extensions:
 
-Added revenue to Movie class
-Added all values to Movie objects in MovieFileCSVReader.dataset_of_movies
-Added relevent testing for above
+- Added revenue to Movie class
+- Added all values to Movie objects in MovieFileCSVReader.dataset_of_movies
+- Added relevent testing for above
 
 ## Testing
 From root run (make sure venv is activated):
