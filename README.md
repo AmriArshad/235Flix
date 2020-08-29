@@ -12,3 +12,8 @@ Completed the following class objects:
 - MovieFileCSVReader
 
 Completed testing for these classes under /tests
+
+Extensions:
+- Added rating, votes, revenue and metascore to Movie class
+- Added all values to Movie objects in MovieFileCSVReader.dataset_of_movies
+- Added relevent testing for above

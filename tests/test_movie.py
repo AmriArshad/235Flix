@@ -153,3 +153,35 @@ def test_hash():
     assert hash(movie) == hash("Moana2016")
     assert hash(movie1) == hash("IT2017")
     assert hash(movie2) == hash("Joker2019")
+
+def test_rating():
+    movie = Movie("Moana", 2016)
+    assert movie.rating == None
+    movie.rating = "amazing"
+    assert movie.rating == None
+    movie.rating = 7.7
+    assert movie.rating == 7.7
+
+def test_votes():
+    movie = Movie("Moana", 2016)
+    assert movie.votes == None
+    movie.votes = "12321"
+    assert movie.votes == None
+    movie.votes = 118151
+    assert movie.votes == 118151
+
+def test_revenue():
+    movie = Movie("Moana", 2016)
+    assert movie.revenue == None
+    movie.revenue = "N/A"
+    assert movie.revenue == None
+    movie.revenue = 248.75
+    assert movie.revenue == 248.75
+
+def test_metascore():
+    movie = Movie("Moana", 2016)
+    assert movie.metascore == None
+    movie.metascore = "N/A"
+    assert movie.metascore == None
+    movie.metascore = 81
+    assert movie.metascore == 81
