@@ -5,10 +5,7 @@
 
 import csv
 
-from flix.domainmodel.movie import Movie
-from flix.domainmodel.actor import Actor
-from flix.domainmodel.genre import Genre
-from flix.domainmodel.director import Director
+from flix.domain.model import Director, Genre, Actor, Movie, Review, User, WatchList
 
 class MovieFileCSVReader:
 

@@ -3,10 +3,7 @@ import pytest
 
 # sys.path.insert(0, os.getcwd())
 
-from flix.domainmodel.movie import Movie
-from flix.domainmodel.actor import Actor
-from flix.domainmodel.genre import Genre
-from flix.domainmodel.director import Director
+from flix.domain.model import Director, Genre, Actor, Movie, Review, User, WatchList
 from flix.datafilereaders.movie_file_csv_reader import MovieFileCSVReader
 
 def test_init():
