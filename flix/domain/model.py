@@ -100,6 +100,7 @@ class Movie:
         self.__genres: list[Genre] = list()
         self.__runtime_minutes: int = 0
         self.__revenue: float = None #in millions
+        self.__reviews = list()
         
     @property
     def title(self) -> str:
@@ -216,8 +217,21 @@ class Movie:
         if type(revenue) == float and revenue >= 0:
             self.__revenue = revenue
 
+    @property
+    def reviews(self):
+        return iter(self.__reviews)
+
+    @property
+    def number_of_reviews(self):
+        return len(self.__reviews)
+
+    def add_review(self, review: 'Review'):
+        self.__reviews.append(review)
+
 class Review:
-    def __init__(self, movie: Movie, review_text: str, rating: int):
+    def __init__(self, user: 'User', movie: Movie, review_text: str, rating: int):
+        self.__user = user
+
         if type(movie) == Movie:
             self.__movie = movie
         else:
@@ -236,7 +250,11 @@ class Review:
         self.__timestamp = datetime.today()
         self.__votes: int = None
         self.__metascore: int = None
-        
+    
+    @property
+    def user(self):
+        return self.__user
+
     @property
     def movie(self):
         return self.__movie
@@ -382,3 +400,10 @@ class WatchList:
         else:
             self.__index += 1
             return self.__watch_list[self.__index-1]
+
+def make_review(review_text: str, user: User, movie: Movie, rating: int):
+    review = Review(user, movie, review_text, rating)
+    user.add_review(review)
+    movie.add_review(review)
+
+    return review

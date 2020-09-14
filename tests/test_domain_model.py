@@ -1,7 +1,23 @@
 import pytest
 from datetime import datetime
 
-from flix.domain.model import Director, Genre, Actor, Movie, Review, User, WatchList
+from flix.domain.model import Director, Genre, Actor, Movie, Review, User, WatchList, make_review
+
+@pytest.fixture
+def user():
+    return User('Martin', 'pw12345')
+
+@pytest.fixture
+def movie():
+    return Movie("Moana", 2016)
+
+@pytest.fixture
+def review(user, movie):
+    return make_review("This movie was very enjoyable.", user, movie, 8)
+    
+@pytest.fixture
+def watchlist():
+    return WatchList()
 
 # DIRECTOR tests
 def test_init():
@@ -259,35 +275,32 @@ def test_revenue():
 
 # REVIEW tests
 
-@pytest.fixture
-def review():
-    return Review(Movie("Moana", 2016), "This movie was very enjoyable.", 8)
+def test_review_relationships(review, movie, user):
 
-def test_init(review):
+    assert review in user.reviews
+    assert review.user is user
+    assert review in movie.reviews
+    assert review.movie is movie    
+
+def test_init(review, user):
     assert repr(review) == "<Review: <Movie Moana, 2016>, Rating: 8>"
 
-    review1 = Review(Movie("IT", 2017), "Ooo scaryyy", 10)
+    review1 = Review(user, Movie("IT", 2017), "Ooo scaryyy", 10)
     assert repr(review1) == "<Review: <Movie IT, 2017>, Rating: 10>"
 
-def test_movie(review):
-    assert repr(review.movie) == "<Movie Moana, 2016>"
-
-    review1 = Review("IT", "Ooo scaryyy", 10)
-    assert review1.movie == None
-
-def test_review_text(review):
+def test_review_text(review, user):
     assert review.review_text == "This movie was very enjoyable."
     
-    review1 = Review(Movie("IT", 2017), 1, 10)
+    review1 = Review(user, Movie("IT", 2017), 1, 10)
     assert review1.review_text == None
 
-def test_rating(review):
+def test_rating(review, user):
     assert repr(review.rating) == "8"
 
-    review1 = Review(Movie("IT", 2017), "Ooo scaryyy", -1)
+    review1 = Review(user, Movie("IT", 2017), "Ooo scaryyy", -1)
     assert review1.rating == None
 
-    review1 = Review(Movie("Joker", 2019), "Thrilling", 11)
+    review1 = Review(user, Movie("Joker", 2019), "Thrilling", 11)
     assert review1.rating == None
 
 # the following two tests will fail at times because of slight differences in the date
@@ -313,14 +326,6 @@ def test_metascore(review):
     assert review.metascore == 81
 
 # USER tests 
-
-@pytest.fixture
-def movie():
-    return Movie("Moana", 2016)
-
-@pytest.fixture
-def review():
-    return Review(Movie("Moana", 2016), "This movie was very enjoyable.", 8)
 
 def test_init():
     user1 = User('Martin', 'pw12345')
@@ -403,17 +408,9 @@ def test_watch_movie(movie):
     assert repr(user1.watched_movies) == "[<Movie Moana, 2016>, <Movie IT, 2017>, <Movie Joker, 2019>]"
     assert user1.time_spent_watching_movies_minutes == 375
 
-def test_add_review(review):
-    user1 = User('Martin', 'pw12345')
-    user1.add_review(review)
-
-    assert repr(user1.reviews) == "[<Review: <Movie Moana, 2016>, Rating: 8>]"
-
 # WATCHLIST tests
 
-@pytest.fixture
-def watchlist():
-    return WatchList()
+
 
 def test_init(watchlist):
     assert watchlist.size() == 0
