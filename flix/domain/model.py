@@ -35,6 +35,10 @@ class Genre:
         else:
             self.__genre_name = genre_name.strip()
 
+    @property
+    def name(self):
+        return self.__genre_name
+
     def __repr__(self):
         return f"<Genre {self.__genre_name}>"
 
@@ -59,6 +63,10 @@ class Actor:
             self.__actor_full_name = actor_full_name.strip()
         self.__actor_colleague: list[Actor] = list()
         # self.__actor_colleague = list()
+
+    @property
+    def name(self):
+        return self.__actor_full_name
 
     def __repr__(self):
         return f"<Actor {self.__actor_full_name}>"
