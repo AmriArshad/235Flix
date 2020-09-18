@@ -28,6 +28,10 @@ def test_add_and_get_movie(repo):
 
     assert repo.get_movie("test1") == None
 
+def test_get_movies(repo):
+    movies = repo.get_movies()
+    assert len(movies) == repo.get_number_of_movies()
+
 def test_first_and_last_movie(repo):
     assert repo.get_first_movie() == Movie("Guardians of the Galaxy", 2014)
     assert repo.get_last_movie() == Movie("Nine Lives", 2016)

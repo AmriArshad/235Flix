@@ -31,6 +31,11 @@ class AbstractRepository(abc.ABC):
         raise NotImplementedError
 
     @abc.abstractmethod
+    def get_movies(self):
+        # returns all movies in repo
+        raise NotImplementedError
+
+    @abc.abstractmethod
     def get_number_of_movies(self) -> int:
         # returns number of movies in the repo
         raise NotImplementedError

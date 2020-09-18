@@ -29,6 +29,9 @@ class MemoryRepository(AbstractRepository):
     def get_movie(self, title) -> Movie:
         return next((movie for movie in self.__movies if movie.title == title), None)
 
+    def get_movies(self):
+        return self.__movies
+
     def get_number_of_movies(self) -> int:
         return len(self.__movies)
 
