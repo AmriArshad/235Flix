@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset = "utf-8">
+        <title>235 Flix</title>
+    </head>
+    <body>
+        <header>
+            <h1><a href = "{{ home_url }}">235 Flix</a></h1>
+        </header>
+        <div>
+            <ul>
+                <li><a href="{{ find_movie_url }}">Search movie by title</a></li>
+                <li><a href = "{{ browse_movies_url }}">Browse movies</a></li>
+            </ul>
+        </div>
+        <div>
+            {% block content %}
+            {% endblock %}
+        </div>
+    </body>
+</html>

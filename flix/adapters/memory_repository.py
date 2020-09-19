@@ -12,15 +12,12 @@ class MemoryRepository(AbstractRepository):
         self.__actors = list()
         self.__users = list()
         self.__reviews = list()
+        self.index = 0
 
     def add_user(self, user: User):
         self.__users.append(user)
 
     def get_user(self, name) -> User:
-        # for user in self.__users:
-        #     if username == user.user_name:
-        #         return user
-        # return None
         return next((user for user in self.__users if user.user_name == name.strip().lower()), None)
 
     def add_movie(self, movie: Movie):

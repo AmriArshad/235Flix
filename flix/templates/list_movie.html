@@ -1,0 +1,26 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+<main>
+    {% if movie %}
+        <p>Title: {{ movie.title }}</p>
+        <p>Release year: {{ movie.release_year }}</p>
+        <p>Description: {{ movie.description }}</p>
+        <p>Director: {{ movie.director }}</p>
+        <p>Actors: {{ movie.actors }}</p>
+        <p>Genres: {{ movie.genres }}</p>
+        <p>Run time: {{ movie.runtime_minutes }}</p>
+        <p>Revenue (millions): {{ movie.revenue }}</p>
+
+        <p>Reviews ({{ movie.number_of_reviews }}):</p>
+        {% for review in movie.reviews %}
+        <p>review</p>        
+        {% endfor %}
+
+    {% else %}
+        <p>No movie found</p>
+    {% endif %}
+</main>
+
+{% endblock %}
