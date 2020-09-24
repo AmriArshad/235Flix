@@ -1,0 +1,18 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+<main>
+    {% if genre %}
+    <h2>Movies in the {{ genre.name }} genre:</h2>
+    <ul>
+        {% for movie in movies %}
+            <li>{{ movie.title }}</li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p>Genre not found.</p>
+    {% endif %}
+</main>
+
+{% endblock %}

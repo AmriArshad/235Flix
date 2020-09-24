@@ -6,6 +6,8 @@ class RepositoryException(Exception):
 	def __init__(self, message = None):
 		pass
 
+repo_instance = None
+
 class AbstractRepository(abc.ABC):
 
     @abc.abstractmethod

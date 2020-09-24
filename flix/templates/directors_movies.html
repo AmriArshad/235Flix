@@ -1,0 +1,18 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+<main>
+    {% if director %}
+    <h2>{{ director.director_full_name }}'s movies:</h2>
+    <ul>
+        {% for movie in movies %}
+            <li><a href="{{ url_for('movies_bp.list_movie', movie = movie.title) }}">{{ movie.title }}</li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p>Director not found.</p>
+    {% endif %}
+</main>
+
+{% endblock %}

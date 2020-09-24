@@ -1,0 +1,18 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+<main>
+    {% if actor %}
+    <h2>{{ actor.name }}'s movies:</h2>
+    <ul>
+        {% for movie in movies %}
+            <li><a href="{{ url_for('movies_bp.list_movie', movie = movie.title) }}">{{ movie.title }}</li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p>Actor not found.</p>
+    {% endif %}
+</main>
+
+{% endblock %}

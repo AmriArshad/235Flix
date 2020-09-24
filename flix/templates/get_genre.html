@@ -4,10 +4,10 @@
 
 <main>
     <div>
-        <form method="POST" action="{{ url_for('movies_bp.find_movie') }}">
+        <form method="POST" action="{{ url_for('movies_bp.browse_by_genre') }}">
             {{ form.csrf_token }}
             <div>
-                {{ form.movie_title.label }} {{ form.movie_title }} {{ form.submit }}
+                {{ form.genre_name.label }} {{ form.genre_name }} {{ form.submit }}
             </div>
         </form>
     </div>  
