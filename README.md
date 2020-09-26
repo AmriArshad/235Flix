@@ -35,3 +35,9 @@ From root run (make sure venv is activated):
 ```shell
 py.test -v
 ```
+
+## Running the web app
+```shell
+flask run
+```
+now open localhost:5000 or http://127.0.0.1:5000/
