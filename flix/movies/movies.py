@@ -45,7 +45,6 @@ def browse_by_actor():
 
     return render_template(
         'movies/get_actor.html',
-        title = 'Search',
         form = actorsMovies
     )
 
@@ -67,7 +66,6 @@ def browse_by_genre():
 
     return render_template(
         'movies/get_genre.html',
-        title = 'Search',
         form = genreMovies
     )
 
@@ -87,7 +85,6 @@ def browse_by_director():
     
     return render_template(
         'movies/get_director.html',
-        title = 'Search',
         form = directorMovies
     )
 
@@ -112,7 +109,6 @@ def find_movie():
 
     return render_template(
         'movies/find_movie.html',
-        title = 'Search',
         form = movieSearch,
     )
 
