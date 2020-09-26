@@ -20,7 +20,7 @@ def browse_movies():
     length = len(movies) - 1
     
     return render_template(
-        'browse_movies.html',
+        'movies/browse_movies.html',
         movies = movies,
         index = repo.repo_instance.index,
         first_url = url_for('movies_bp.view', index = 0, length = length, view = "movies"),
@@ -38,13 +38,13 @@ def browse_by_actor():
         movies = repo.repo_instance.get_movies_acted_by(post_actor)
 
         return render_template(
-            'actors_movies.html',
+            'movies/actors_movies.html',
             movies = movies,
             actor = post_actor
         )
 
     return render_template(
-        'get_actor.html',
+        'movies/get_actor.html',
         title = 'Search',
         form = actorsMovies
     )
@@ -60,13 +60,13 @@ def browse_by_genre():
         movies = repo.repo_instance.get_movies_in_genre(post_genre)
 
         return render_template(
-            'genres_movies.html',
+            'movies/genres_movies.html',
             movies = movies,
             genre = post_genre
         )
 
     return render_template(
-        'get_genre.html',
+        'movies/get_genre.html',
         title = 'Search',
         form = genreMovies
     )
@@ -80,13 +80,13 @@ def browse_by_director():
         movies = repo.repo_instance.get_movies_directed_by(post_director)
 
         return render_template(
-            'directors_movies.html',
+            'movies/directors_movies.html',
             movies = movies,
             director = post_director
         )
     
     return render_template(
-        'get_director.html',
+        'movies/get_director.html',
         title = 'Search',
         form = directorMovies
     )
@@ -101,17 +101,17 @@ def find_movie():
         for movie in repo.repo_instance.get_movies():
             if post_title.data.lower() == movie.title.lower():
                 return render_template(
-                    'list_movie.html',
+                    'movies/list_movie.html',
                     movie = movie
                 )
         
         return render_template(
-            'list_movie.html',
+            'movies/list_movie.html',
             movie = None
         )
 
     return render_template(
-        'find_movie.html',
+        'movies/find_movie.html',
         title = 'Search',
         form = movieSearch,
     )
@@ -137,7 +137,7 @@ def list_movie():
             break
     
     return render_template(
-        'list_movie.html',
+        'movies/list_movie.html',
         movie = movie
     )
 

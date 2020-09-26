@@ -15,6 +15,8 @@ def create_app():
         from .movies import movies
         app.register_blueprint(movies.movies_blueprint)
 
+        # from .authentication import authentication
+
         repo.repo_instance = MemoryRepository()
         repo.repo_instance.populate("flix/datafiles/Data1000Movies.csv")
 
