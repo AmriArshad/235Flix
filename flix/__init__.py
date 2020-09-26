@@ -12,7 +12,7 @@ def create_app():
 
     with app.app_context():
         #insert blueprints
-        from .movies_blueprint import movies
+        from .movies import movies
         app.register_blueprint(movies.movies_blueprint)
 
         repo.repo_instance = MemoryRepository()
