@@ -3,49 +3,28 @@
 {% block content %}
 
 <main>
-    <p><a href=" {{ first_url }}">first</a></p>
-    <p><a href=" {{ prev_url }}">prev</a></p>
-    <p><a href=" {{ next_url }}">next</a></p>
-    <p><a href=" {{ last_url }}">last</a></p>
-    {% if movies[index] %}
-        <p>Title: {{ movies[index].title }}</p>
-        <p>Release year: {{ movies[index].release_year }}</p>
-        <p>Description: {{ movies[index].description }}</p>
-        <p>Director: {{ movies[index].director }}</p>
-        <p>Actors: {{ movies[index].actors }}</p>
-        <p>Genres: {{ movies[index].genres }}</p>
-        <p>Run time: {{ movies[index].runtime_minutes }}</p>
-        <p>Revenue (millions): {{ movies[index].revenue }}</p>
-        <a href = "{{ url_for('movies_bp.review_a_movie', movie = movies[index].title) }}">Reviews ({{ movies[index].number_of_reviews }})</a>
-    {% else %}
-        <p>No movie found</p>
-    {% endif %}
-    <!-- <table>
-        <tr>
-            <th>Title</th>
-            <th>Release year</th>
-            <th>Description</th>
-            <th>Director</th>
-            <th>Actors</th>
-            <th>Genres</th>
-            <th>Run time</th>
-            <th>Revenue</th>
-            <th>Number of reviews</th>
-        </tr>
-        {% for movie in movies %}
-            <tr>
-                <td>{{ movie.title }}</td>
-                <td>{{ movie.release_year }}</td>
-                <td>{{ movie.description }}</td>
-                <td>{{ movie.director }}</td>
-                <td>{{ movie.actors }}</td>
-                <td>{{ movie.genres }}</td>
-                <td>{{ movie.runtime_minutes }}</td>
-                <td>{{ movie.revenue }}</td>
-                <td>{{ movie.number_of_reviews }}</td>
-            </tr>
-        {% endfor %}
-    </table> -->
+    <div>
+        {% if movies[index] %}
+            <p>Title: {{ movies[index].title }}</p>
+            <p>Release year: {{ movies[index].release_year }}</p>
+            <p>Description: {{ movies[index].description }}</p>
+            <p>Director: {{ movies[index].director }}</p>
+            <p>Actors: {{ movies[index].actors }}</p>
+            <p>Genres: {{ movies[index].genres }}</p>
+            <p>Run time: {{ movies[index].runtime_minutes }}</p>
+            <p>Revenue (millions): {{ movies[index].revenue }}</p>
+            <a href = "{{ url_for('movies_bp.review_a_movie', movie = movies[index].title) }}">Reviews ({{ movies[index].number_of_reviews }})</a>
+        {% else %}
+            <p>No movie found</p>
+        {% endif %}
+    </div>
+    <br>
+    <div>
+        <a href=" {{ first_url }}">first</a>
+        <a href=" {{ prev_url }}">prev</a>
+        <a href=" {{ next_url }}">next</a>
+        <a href=" {{ last_url }}">last</a>
+    </div>
 </main>
 
 {% endblock %}
