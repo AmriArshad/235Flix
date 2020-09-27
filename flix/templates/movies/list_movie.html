@@ -12,12 +12,7 @@
         <p>Genres: {{ movie.genres }}</p>
         <p>Run time: {{ movie.runtime_minutes }}</p>
         <p>Revenue (millions): {{ movie.revenue }}</p>
-
-        <p>Reviews ({{ movie.number_of_reviews }}):</p>
-        {% for review in movie.reviews %}
-        <p>review</p>        
-        {% endfor %}
-
+        <a href = "{{ url_for('movies_bp.review_a_movie', movie = movie.title) }}">Reviews ({{ movie.number_of_reviews }})</a>
     {% else %}
         <p>No movie found</p>
     {% endif %}

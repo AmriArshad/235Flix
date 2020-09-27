@@ -1,10 +1,13 @@
-from flask import Blueprint, render_template, url_for, request
+from flask import Blueprint, render_template, url_for, request, session
 from flask_wtf import FlaskForm
-from wtforms import StringField, SelectField, SubmitField
-from wtforms.validators import DataRequired
-from flix.domain.model import Actor, Director, Genre, Movie
+from wtforms import StringField, SelectField, SubmitField, TextAreaField, IntegerField, HiddenField
+from wtforms.validators import DataRequired,Length, ValidationError
+from better_profanity import profanity
 
+from flix.domain.model import Actor, Director, Genre, Movie
 import flix.adapters.repository as repo
+import flix.movies.services as services
+from flix.authentication.authentication import login_required
 
 movies_blueprint = Blueprint('movies_bp', __name__)
 
@@ -137,6 +140,45 @@ def list_movie():
         movie = movie
     )
 
+@movies_blueprint.route('/review', methods = ['GET', 'POST'])
+@login_required
+def review_a_movie():
+    username = session['username']
+
+    form = ReviewForm()
+
+    if form.validate_on_submit():
+        movie_title = str(form.movie_title.data)
+
+        services.add_review(movie_title, form.review.data, username, form.rating.data, repo.repo_instance)
+
+        movie = services.get_movie(movie_title, repo.repo_instance)
+        
+        
+        return render_template(
+            'movies/list_movie.html',
+            movie = repo.repo_instance.get_movie(movie_title)
+        )
+    
+    if request.method == 'GET':
+        movie_title = str(request.args.get('movie'))
+        
+        form.movie_title.data = movie_title
+        movie = services.get_movie(movie_title, repo.repo_instance)
+
+    else:
+        movie_title = form.movie_title.data
+        movie = services.get_movie(movie_title, repo.repo_instance)
+
+
+    return render_template(
+        'movies/review_a_movie.html',
+        title = 'Edit movie',
+        movie = movie,
+        form = form,
+    )
+        
+
 class movieByTitle(FlaskForm):
     movie_title = StringField('Movie title:', [DataRequired()])
     submit = SubmitField('Find movie')
@@ -152,3 +194,19 @@ class movieByGenre(FlaskForm):
 class movieByDirector(FlaskForm):
     director_name = StringField('Director: ', [DataRequired()])
     submit = SubmitField('Find movies')
+
+class ProfanityFree:
+    def __init__(self, message = None):
+        if not message:
+            message = u'Field must not contain profanity'
+        self.message = message
+    
+    def __call__(self, form, field):
+        if profanity.contains_profanity(field.data):
+            raise ValidationError(self.message)
+
+class ReviewForm(FlaskForm):
+    review = TextAreaField('Review', [DataRequired(), Length(min = 3, message = 'your review is too short'), ProfanityFree(message = 'Your review must not contain profanity')])
+    rating = IntegerField('Rating', [DataRequired()])
+    movie_title = HiddenField('Movie title')
+    submit = SubmitField('Submit')

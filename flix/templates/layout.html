@@ -17,11 +17,13 @@
         <div>
             <a href="{{ url_for('movies_bp.find_movie') }}">Search</a>
             <a href = "{{ url_for('movies_bp.browse_movies') }}">Browse movies</a>
+        </div>
+        <br>
+        <div>
             <a href = "{{ url_for('movies_bp.browse_by_actor') }}">Browse by actor</a>
             <a href = "{{ url_for('movies_bp.browse_by_genre') }}">Browse by genre</a>
             <a href = "{{ url_for('movies_bp.browse_by_director') }}">Browse by director</a>
         </div>
-        <br>
         <div>
             {% block content %}
             {% endblock %}
