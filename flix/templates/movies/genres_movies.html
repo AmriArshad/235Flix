@@ -7,7 +7,7 @@
     <h2>Movies in the {{ genre.name }} genre:</h2>
     <ul>
         {% for movie in movies %}
-            <li>{{ movie.title }}</li>
+            <li><a href="{{ url_for('movies_bp.list_movie', movie = movie.title) }}">{{ movie.title }}</li>
         {% endfor %}
     </ul>
     {% else %}

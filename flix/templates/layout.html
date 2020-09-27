@@ -13,15 +13,15 @@
             <a href="{{ url_for('authentication_bp.login' )}}">Login</a>
             <a href="{{ url_for('authentication_bp.logout' )}}">Logout</a>
         </div>
+        <br>
         <div>
-            <ul>
-                <li><a href="{{ url_for('movies_bp.find_movie') }}">Search movie by title</a></li>
-                <li><a href = "{{ url_for('movies_bp.browse_movies') }}">Browse movies</a></li>
-                <li><a href = "{{ url_for('movies_bp.browse_by_actor') }}">Browse movies by actor</a></li>
-                <li><a href = "{{ url_for('movies_bp.browse_by_genre') }}">Browse movies by genre</a></li>
-                <li><a href = "{{ url_for('movies_bp.browse_by_director') }}">Browse movies by director</a></li>
-            </ul>
+            <a href="{{ url_for('movies_bp.find_movie') }}">Search</a>
+            <a href = "{{ url_for('movies_bp.browse_movies') }}">Browse movies</a>
+            <a href = "{{ url_for('movies_bp.browse_by_actor') }}">Browse by actor</a>
+            <a href = "{{ url_for('movies_bp.browse_by_genre') }}">Browse by genre</a>
+            <a href = "{{ url_for('movies_bp.browse_by_director') }}">Browse by director</a>
         </div>
+        <br>
         <div>
             {% block content %}
             {% endblock %}
