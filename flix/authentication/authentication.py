@@ -11,6 +11,8 @@ from functools import wraps
 import flix.authentication.services as services
 import flix.adapters.repository as repo
 
+import flix.movies.movies as movies
+
 authentication_blueprint = Blueprint('authentication_bp', __name__, url_prefix = '/authentication')
 
 @authentication_blueprint.route('/register', methods = ['GET', 'POST'])
@@ -31,7 +33,8 @@ def register():
         form = form,
         username_error_message = username_not_unique,
         password_error_message = None,
-        handler_url = url_for('authentication_bp.register')
+        handler_url = url_for('authentication_bp.register'),
+        searchForm = movies.movieByTitle()
     )
 
 @authentication_blueprint.route('/login', methods = ['GET', 'POST'])
@@ -59,7 +62,8 @@ def login():
         title = 'Login',
         form = form,
         username_error_message = username_not_recognised,
-        password_error_message = password_does_not_match_username
+        password_error_message = password_does_not_match_username,
+        searchForm = movies.movieByTitle()
     )
 
 @authentication_blueprint.route('/logout')

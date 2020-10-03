@@ -1,16 +1,8 @@
-{% extends 'layout.html' %}
-
-{% block content %}
-
-<main>
-    <div>
-        <form method="POST" action="{{ url_for('movies_bp.find_movie') }}">
-            {{ form.csrf_token }}
-            <div>
-                {{ form.movie_title.label }} {{ form.movie_title }} {{ form.submit }}
-            </div>
-        </form>
-    </div>  
-</main>
-
-{% endblock %}
+<div>
+    <form method="POST" action="{{ url_for('movies_bp.find_movie') }}">
+        {{ searchForm.csrf_token }}
+        <div>
+            {{ searchForm.movie_title.label }} {{ searchForm.movie_title }} {{ searchForm.submit }}
+        </div>
+    </form>
+</div>

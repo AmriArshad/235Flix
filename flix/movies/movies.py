@@ -12,9 +12,10 @@ from flix.authentication.authentication import login_required
 movies_blueprint = Blueprint('movies_bp', __name__)
 
 @movies_blueprint.route('/')
-def home():
+def home(): 
     return render_template(
-        'home.html'
+        'home.html',
+        searchForm = movieByTitle()
     )
 
 @movies_blueprint.route('/browse')
@@ -30,6 +31,7 @@ def browse_movies():
         prev_url = url_for('movies_bp.view', index = repo.repo_instance.index - 1, length = length, view = "movies"),
         next_url = url_for('movies_bp.view', index = repo.repo_instance.index + 1, length = length, view = "movies"),
         last_url = url_for('movies_bp.view', index = length, length = length, view = "movies"),
+        searchForm = movieByTitle()
     )
 
 @movies_blueprint.route('/browse-actor', methods = ['GET', 'POST'])
@@ -43,12 +45,14 @@ def browse_by_actor():
         return render_template(
             'movies/actors_movies.html',
             movies = movies,
-            actor = post_actor
+            actor = post_actor,
+            searchForm = movieByTitle()
         )
 
     return render_template(
         'movies/get_actor.html',
-        form = actorsMovies
+        form = actorsMovies,
+        searchForm = movieByTitle()
     )
 
 @movies_blueprint.route('/browse-genre', methods = ['GET', 'POST'])
@@ -64,12 +68,14 @@ def browse_by_genre():
         return render_template(
             'movies/genres_movies.html',
             movies = movies,
-            genre = post_genre
+            genre = post_genre,
+            searchForm = movieByTitle()
         )
 
     return render_template(
         'movies/get_genre.html',
-        form = genreMovies
+        form = genreMovies,
+        searchForm = movieByTitle()
     )
 
 @movies_blueprint.route('/browse-director', methods = ['GET', 'POST'])
@@ -83,12 +89,14 @@ def browse_by_director():
         return render_template(
             'movies/directors_movies.html',
             movies = movies,
-            director = post_director
+            director = post_director,
+            searchForm = movieByTitle()
         )
     
     return render_template(
         'movies/get_director.html',
-        form = directorMovies
+        form = directorMovies,
+        searchForm = movieByTitle()
     )
 
 @movies_blueprint.route('/find', methods = ['GET', 'POST'])
@@ -102,17 +110,19 @@ def find_movie():
             if post_title.data.lower() == movie.title.lower():
                 return render_template(
                     'movies/list_movie.html',
-                    movie = movie
+                    movie = movie,
+                    searchForm = movieByTitle()
                 )
         
         return render_template(
             'movies/list_movie.html',
-            movie = None
+            movie = None,
+            searchForm = movieByTitle()
         )
 
     return render_template(
         'movies/find_movie.html',
-        form = movieSearch,
+        form = movieSearch
     )
 
 @movies_blueprint.route('/view', methods = ['GET'])
@@ -137,7 +147,8 @@ def list_movie():
     
     return render_template(
         'movies/list_movie.html',
-        movie = movie
+        movie = movie,
+        searchForm = movieByTitle()
     )
 
 @movies_blueprint.route('/review', methods = ['GET', 'POST'])
@@ -157,7 +168,8 @@ def review_a_movie():
         
         return render_template(
             'movies/list_movie.html',
-            movie = repo.repo_instance.get_movie(movie_title)
+            movie = repo.repo_instance.get_movie(movie_title),
+            searchForm = movieByTitle()
         )
     
     if request.method == 'GET':
@@ -176,12 +188,12 @@ def review_a_movie():
         title = 'Edit movie',
         movie = movie,
         form = form,
+        searchForm = movieByTitle()
     )
         
-
 class movieByTitle(FlaskForm):
-    movie_title = StringField('Movie title:', [DataRequired()])
-    submit = SubmitField('Find movie')
+    movie_title = StringField('Search:', [DataRequired()], description="Movie title")
+    submit = SubmitField('Find')
 
 class movieByActor(FlaskForm):
     actor_name = StringField('Actor:', [DataRequired()])
