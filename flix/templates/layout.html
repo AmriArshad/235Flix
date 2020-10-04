@@ -5,11 +5,7 @@
         <title>235 Flix</title>
     </head>
     <body>
-        <header>
-            <h1><a href = "{{ url_for('movies_bp.home') }}">235 Flix</a></h1>
-        </header>
         {% include 'navigation.html' %}
-        <br>
         <div>
             {% block content %}
             {% endblock %}
