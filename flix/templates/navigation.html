@@ -1,0 +1,21 @@
+<nav>
+    {% if 'username' in session %}
+        <h3 id="nav-header">Logged in as: {{ session['username'] }}</h3> 
+        <a href="{{ url_for('authentication_bp.logout' )}}">Logout</a>
+    {% else %}
+        <a href="{{ url_for('authentication_bp.register' )}}">Register</a>
+        <a href="{{ url_for('authentication_bp.login' )}}">Login</a>
+        <a href="{{ url_for('authentication_bp.logout' )}}">Logout</a>
+    {% endif %}
+</nav>
+<br>
+<div>
+    {% include 'movies/find_movie.html' %}
+</div>
+<br>
+<nav>
+    <a href = "{{ url_for('movies_bp.browse_movies') }}">Browse movies</a>
+    <a href = "{{ url_for('movies_bp.browse_by_actor') }}">Browse by actor</a>
+    <a href = "{{ url_for('movies_bp.browse_by_genre') }}">Browse by genre</a>
+    <a href = "{{ url_for('movies_bp.browse_by_director') }}">Browse by director</a>
+</nav>

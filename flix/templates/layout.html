@@ -8,25 +8,7 @@
         <header>
             <h1><a href = "{{ url_for('movies_bp.home') }}">235 Flix</a></h1>
         </header>
-        <div>
-            <a href="{{ url_for('authentication_bp.register' )}}">Register</a>
-            <a href="{{ url_for('authentication_bp.login' )}}">Login</a>
-            <a href="{{ url_for('authentication_bp.logout' )}}">Logout</a>
-        </div>
-        <br>
-        <div>
-            {% include 'movies/find_movie.html' %}
-        </div>
-        <br>
-        <div>
-            <a href = "{{ url_for('movies_bp.browse_movies') }}">Browse movies</a>
-        </div>
-        <br>
-        <div>
-            <a href = "{{ url_for('movies_bp.browse_by_actor') }}">Browse by actor</a>
-            <a href = "{{ url_for('movies_bp.browse_by_genre') }}">Browse by genre</a>
-            <a href = "{{ url_for('movies_bp.browse_by_director') }}">Browse by director</a>
-        </div>
+        {% include 'navigation.html' %}
         <br>
         <div>
             {% block content %}
