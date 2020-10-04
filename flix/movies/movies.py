@@ -191,7 +191,7 @@ def review_a_movie():
         
 class movieByTitle(FlaskForm):
     movie_title = StringField('Search:', [DataRequired()])
-    submit = SubmitField('Find')
+    submit = SubmitField('Search')
 
 class movieByActor(FlaskForm):
     actor_name = StringField('Actor:', [DataRequired()])

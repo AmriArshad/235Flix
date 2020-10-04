@@ -1,25 +1,38 @@
-<div id = "navBar">
-    <nav>
-        <ul>
-        <div id = "authNav">
-            <li><h1><a href = "{{ url_for('movies_bp.home') }}">235 Flix</a></h1></li>
-            {% if 'username' in session %}
-                <li><h3>Logged in as: {{ session['username'] }}</h3></li>
-                <li><a href="{{ url_for('authentication_bp.logout' )}}">Logout</a></li>
-            {% else %}
-                <li><a href="{{ url_for('authentication_bp.register' )}}">Register</a></li>
-                <li><a href="{{ url_for('authentication_bp.login' )}}">Login</a></li>
-                <li><a href="{{ url_for('authentication_bp.logout' )}}">Logout</a></li>
-            {% endif %}
-        </div>
+<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+    <a class="navbar-brand" href = "{{ url_for('movies_bp.home') }}">235 Flix</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    
+    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Browse</a>
+                <div class="dropdown-menu" aria-labelledby="dropdown01">
+                  <a class="dropdown-item" href="{{ url_for('movies_bp.browse_movies') }}">Movies</a>
+                  <a class="dropdown-item" href = "{{ url_for('movies_bp.browse_by_actor') }}">Movies by actor</a>
+                  <a class="dropdown-item" href = "{{ url_for('movies_bp.browse_by_genre') }}">Movies by genre</a>
+                  <a class="dropdown-item" href = "{{ url_for('movies_bp.browse_by_director') }}">Movies by director</a>
+                </div>
+            </li>
 
-        <div id = "browseNav">
-            {% include 'movies/find_movie.html' %}
-            <li><a href = "{{ url_for('movies_bp.browse_movies') }}">Browse movies</a></li>
-            <li><a href = "{{ url_for('movies_bp.browse_by_actor') }}">Browse by actor</a></li>
-            <li><a href = "{{ url_for('movies_bp.browse_by_genre') }}">Browse by genre</a></li>
-            <li><a href = "{{ url_for('movies_bp.browse_by_director') }}">Browse by director</a></li>
-        </div>
+            {% if 'username' in session %}
+                <li class="nav-item active">
+                    <a class="nav-link" >Logged in as: {{ session['username'] }}</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('authentication_bp.logout' )}}">Logout</a>
+                </li>
+            {% else %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('authentication_bp.login' )}}">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('authentication_bp.register' )}}">Register</a>
+                </li>
+            {% endif %}
+
         </ul>
-    </nav>
-</div>
+        {% include 'movies/find_movie.html' %}
+    </div>
+</nav>
