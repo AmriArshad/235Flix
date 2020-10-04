@@ -165,7 +165,6 @@ def review_a_movie():
 
         movie = services.get_movie(movie_title, repo.repo_instance)
         
-        
         return render_template(
             'movies/list_movie.html',
             movie = repo.repo_instance.get_movie(movie_title),
@@ -181,7 +180,6 @@ def review_a_movie():
     else:
         movie_title = form.movie_title.data
         movie = services.get_movie(movie_title, repo.repo_instance)
-
 
     return render_template(
         'movies/review_a_movie.html',
