@@ -102,5 +102,5 @@ class RegistrationForm(FlaskForm):
 
 class LoginForm(FlaskForm):
     username = StringField('Username', [DataRequired()])
-    password = StringField('Password', [DataRequired()])
+    password = PasswordField('Password', [DataRequired()])
     submit = SubmitField('Login')
