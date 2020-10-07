@@ -16,6 +16,10 @@
                 </div>
             </li>
 
+        </ul>
+        {% include 'movies/find_movie.html' %}    
+        <ul class="navbar-nav">
+
             {% if 'username' in session %}
                 <li class="nav-item active">
                     <a class="nav-link" >Logged in as: {{ session['username'] }}</a>
@@ -31,8 +35,6 @@
                     <a class="nav-link" href="{{ url_for('authentication_bp.register' )}}">Register</a>
                 </li>
             {% endif %}
-
         </ul>
-        {% include 'movies/find_movie.html' %}
     </div>
 </nav>
