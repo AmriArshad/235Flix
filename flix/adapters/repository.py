@@ -43,15 +43,8 @@ class AbstractRepository(abc.ABC):
         raise NotImplementedError
 
     @abc.abstractmethod
-    def get_first_movie(self) -> Movie:
-        # returns the first movie in the repo
-        # if repo is empty return None
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def get_last_movie(self) -> Movie:
-        # returns the last movie in the repo
-        # if repo is empty return None
+    def get_movies_by_title(self, search_item) -> Movie:
+        # returns movies that contain a search result
         raise NotImplementedError
 
     @abc.abstractmethod

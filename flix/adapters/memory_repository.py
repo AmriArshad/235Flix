@@ -32,15 +32,8 @@ class MemoryRepository(AbstractRepository):
     def get_number_of_movies(self) -> int:
         return len(self.__movies)
 
-    def get_first_movie(self) -> Movie:
-        if len(self.__movies) > 0:
-            return self.__movies[0]
-        return None
-
-    def get_last_movie(self) -> Movie:
-        if len(self.__movies) > 0:
-            return self.__movies[-1]
-        return None
+    def get_movies_by_title(self, search_item) -> Movie:
+        return [movie for movie in self.__movies if search_item.lower() in movie.title.lower()]
 
     def get_movies_acted_by(self, actor: Actor):
         return [movie for movie in self.__movies if actor in movie.actors]
