@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, url_for, request, session
+from flask import Blueprint, render_template, redirect, url_for, request, session
 from flask_wtf import FlaskForm
 from wtforms import StringField, SelectField, SubmitField, TextAreaField, IntegerField, HiddenField
 from wtforms.validators import DataRequired,Length, ValidationError
@@ -158,11 +158,7 @@ def review_a_movie():
 
         movie = services.get_movie(movie_title, repo.repo_instance)
         
-        return render_template(
-            'movies/list_movie.html',
-            movie = repo.repo_instance.get_movie(movie_title),
-            searchForm = movieByTitle()
-        )
+        return redirect(url_for('movies_bp.list_movie', movie = movie_title))
     
     if request.method == 'GET':
         movie_title = str(request.args.get('movie'))

@@ -29,6 +29,14 @@ def get_movie(movie_title: str, repo: AbstractRepository):
 
     return movie_to_dict(movie)
 
+def get_reviews_for_movie(movie_title, repo: AbstractRepository):
+    movie = repo.get_movie(movie_title)
+
+    if movie is None:
+        raise NonExistentMovieException
+
+    return reviews_to_dict(movie.reviews)
+
 def movie_to_dict(movie: Movie):
     movie_dict = {
         'title': movie.title,
