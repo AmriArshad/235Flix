@@ -252,8 +252,10 @@ class Review:
 
         if type(rating) == int and rating <= 10 and rating >= 0:
             self.__rating = rating
-        else:
-            self.__rating = None
+        elif rating > 10:
+            self.__rating = 10
+        elif rating < 0:
+            self.__rating = 0
         
         self.__timestamp = datetime.today()
         self.__votes: int = None
