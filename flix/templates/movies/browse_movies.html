@@ -4,9 +4,15 @@
 
 <div class="container">
     <div class="row">
-        {% for n in range(3) %}
-        <div class="col-sm">
-            {% if movies[index+n] %}
+        {% if movies[index] and movies[index+1] and movies[index+2] %}
+            {% set num = 3 %}
+        {% elif movies[index] and movies[index+1] %}
+            {% set num = 2 %}
+        {% elif movies[index] %}
+            {% set num = 1 %}
+        {% endif %}
+        {% for n in range(num) %}
+            <div class="col-sm">
                 <h1>{{ movies[index+n].title }}</h1>
                 <p>{{ movies[index+n].runtime_minutes }} min</p>
                 <p>{{ movies[index+n].description }}</p>
@@ -36,8 +42,7 @@
                     <p>Revenue: Unknown </p>
                 {% endif %}
                 <a href = "{{ url_for('movies_bp.review_a_movie', movie = movies[index+n].title) }}">Reviews ({{ movies[index+n].number_of_reviews }})</a>
-            {% endif %}
-        </div>
+            </div>
         {% endfor %}
     </div>
   </div>
