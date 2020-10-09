@@ -6,38 +6,36 @@
     <div class="row">
         {% for n in range(3) %}
         <div class="col-sm">
-            {% if movies[index] %}
-                <h1>{{ movies[index].title }}</h1>
-                <p>{{ movies[index].runtime_minutes }} min</p>
-                <p>{{ movies[index].description }}</p>
+            {% if movies[index+n] %}
+                <h1>{{ movies[index+n].title }}</h1>
+                <p>{{ movies[index+n].runtime_minutes }} min</p>
+                <p>{{ movies[index+n].description }}</p>
                 <p>Genres: 
-                    {% for genre in movies[index].genres %}
-                        {% if genre != movies[index].genres[-1] %}
+                    {% for genre in movies[index+n].genres %}
+                        {% if genre != movies[index+n].genres[-1] %}
                             {{ genre.name }}, 
                         {% else %}
                             {{ genre.name }}
                         {% endif %}
                     {% endfor %}
                 </p>
-                <p>Release: {{ movies[index].release_year }}</p>
-                <p>Director: {{ movies[index].director.director_full_name }}</p>
+                <p>Release: {{ movies[index+n].release_year }}</p>
+                <p>Director: {{ movies[index+n].director.director_full_name }}</p>
                 <p>Cast: 
-                {% for actor in movies[index].actors %}
-                    {% if actor != movies[index].actors[-1] %}
+                {% for actor in movies[index+n].actors %}
+                    {% if actor != movies[index+n].actors[-1] %}
                         {{ actor.name }}, 
                     {% else %}
                         {{ actor.name }}
                     {% endif %}
                 {% endfor %}
                 </p> 
-                {% if movies[index].revenue %}
-                    <p>Revenue: ${{ movies[index].revenue }} million</p>
+                {% if movies[index+n].revenue %}
+                    <p>Revenue: ${{ movies[index+n].revenue }} million</p>
                 {% else %}
                     <p>Revenue: Unknown </p>
                 {% endif %}
-                <a href = "{{ url_for('movies_bp.review_a_movie', movie = movies[index].title) }}">Reviews ({{ movies[index].number_of_reviews }})</a>
-            {% else %}
-                <p>No movie found</p>
+                <a href = "{{ url_for('movies_bp.review_a_movie', movie = movies[index+n].title) }}">Reviews ({{ movies[index+n].number_of_reviews }})</a>
             {% endif %}
         </div>
         {% endfor %}

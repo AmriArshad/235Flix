@@ -28,8 +28,8 @@ def browse_movies():
         movies = movies,
         index = repo.repo_instance.index,
         first_url = url_for('movies_bp.view', index = 0, length = length),
-        prev_url = url_for('movies_bp.view', index = repo.repo_instance.index - 1, length = length),
-        next_url = url_for('movies_bp.view', index = repo.repo_instance.index + 1, length = length),
+        prev_url = url_for('movies_bp.view', index = repo.repo_instance.index - 3, length = length),
+        next_url = url_for('movies_bp.view', index = repo.repo_instance.index + 3, length = length),
         last_url = url_for('movies_bp.view', index = length, length = length),
         searchForm = movieByTitle()
     )
