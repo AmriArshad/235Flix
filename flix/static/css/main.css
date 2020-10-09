@@ -5,3 +5,38 @@ body {
 ul{
     list-style-type: none;
 }
+
+input[type='text'],
+    select {
+        padding: 7px 20px;
+        margin: 8px 0;
+        display: inline-block;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+
+input[type='password'],
+    select {
+        padding: 7px 20px;
+        margin: 8px 0;
+        display: inline-block;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+
+input[type='submit'] {
+     background-color: #3263cd;
+     color: white;
+     padding: 7px 20px;
+     margin: 8px 0;
+     border: none;
+     border-radius: 4px;
+     cursor: pointer;
+}
+
+input[type='submit']:hover {
+    background-color: #e74fdb;
+    color: black;
+}
