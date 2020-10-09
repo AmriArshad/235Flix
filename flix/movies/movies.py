@@ -106,12 +106,18 @@ def find_movie():
     if movieSearch.validate_on_submit():
         post_title = movieSearch.movie_title
         movies = repo.repo_instance.get_movies_by_title(post_title.data)
-        
-        return render_template(
-            'movies/searched_movies.html',
-            movies = movies,
-            searchForm = movieByTitle()
-        )
+        if len(movies) == 1:
+            return render_template(
+                'movies/list_movie.html',
+                movie = movies[0],
+                searchForm = movieByTitle()
+            )
+        else:
+            return render_template(
+                'movies/searched_movies.html',
+                movies = movies,
+                searchForm = movieByTitle()
+            )
 
     return render_template(
         'movies/find_movie.html',
