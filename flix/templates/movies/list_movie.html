@@ -2,23 +2,12 @@
 
 {% block content %}
 
-<main>
+<div>
     {% if movie %}
-        <p>Title: {{ movie.title }}</p>
-        <p>Release year: {{ movie.release_year }}</p>
-        <p>Description: {{ movie.description }}</p>
-        <p>Director: {{ movie.director.director_full_name }}</p>
-        <p1>Actors: </p1> 
-            {% for actor in movie.actors %}
-                {% if actor != movie.actors[-1] %}
-                    {{ actor.name }}, 
-                {% else %}
-                    {{ actor.name }}
-                {% endif %}
-            {% endfor %}
-            <!-- <p>Actors: {{ movie.actors }}</p> -->
-            <p></p>
-            <p1>Genres: </p1>
+        <h1>{{ movie.title }}</h1>
+        <p>{{ movie.runtime_minutes }} min</p>
+        <p>{{ movie.description }}</p>
+        <p>Genres: 
             {% for genre in movie.genres %}
                 {% if genre != movie.genres[-1] %}
                     {{ genre.name }}, 
@@ -26,17 +15,27 @@
                     {{ genre.name }}
                 {% endif %}
             {% endfor %}
-            <!-- <p>Genres: {{ movie.genres }}</p> -->
-            <p>Run time: {{ movie.runtime_minutes }}</p>
-            {% if movie.revenue %}
-                <p>Revenue (millions): {{ movie.revenue }}</p>
+        </p>
+        <p>Release: {{ movie.release_year }}</p>
+        <p>Director: {{ movie.director.director_full_name }}</p>
+        <p>Cast: 
+        {% for actor in movie.actors %}
+            {% if actor != movie.actors[-1] %}
+                {{ actor.name }}, 
             {% else %}
-                <p>Revenue (millions): Unknown </p>
+                {{ actor.name }}
             {% endif %}
+        {% endfor %}
+        </p> 
+        {% if movie.revenue %}
+            <p>Revenue: ${{ movie.revenue }} million</p>
+        {% else %}
+            <p>Revenue: Unknown </p>
+        {% endif %}
         <a href = "{{ url_for('movies_bp.review_a_movie', movie = movie.title) }}">Reviews ({{ movie.number_of_reviews }})</a>
     {% else %}
         <p>No movie found</p>
     {% endif %}
-</main>
+</div>
 
 {% endblock %}

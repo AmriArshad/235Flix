@@ -27,13 +27,13 @@ def browse_movies():
         'movies/browse_movies.html',
         movies = movies,
         index = repo.repo_instance.index,
-        first_url = url_for('movies_bp.view', index = 0, length = length, view = "movies"),
-        prev_url = url_for('movies_bp.view', index = repo.repo_instance.index - 1, length = length, view = "movies"),
-        next_url = url_for('movies_bp.view', index = repo.repo_instance.index + 1, length = length, view = "movies"),
-        last_url = url_for('movies_bp.view', index = length, length = length, view = "movies"),
+        first_url = url_for('movies_bp.view', index = 0, length = length),
+        prev_url = url_for('movies_bp.view', index = repo.repo_instance.index - 1, length = length),
+        next_url = url_for('movies_bp.view', index = repo.repo_instance.index + 1, length = length),
+        last_url = url_for('movies_bp.view', index = length, length = length),
         searchForm = movieByTitle()
     )
-
+    
 @movies_blueprint.route('/browse-actor', methods = ['GET', 'POST'])
 def browse_by_actor():
     actorsMovies = movieByActor()

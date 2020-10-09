@@ -2,50 +2,53 @@
 
 {% block content %}
 
-<main>
-    <div>
-        {% if movies[index] %}
-            <p>Title: {{ movies[index].title }}</p>
-            <p>Release year: {{ movies[index].release_year }}</p>
-            <p>Description: {{ movies[index].description }}</p>
-            <p>Director: {{ movies[index].director.director_full_name }}</p>
-            <p1>Actors: </p1> 
-            {% for actor in movies[index].actors %}
-                {% if actor != movies[index].actors[-1] %}
-                    {{ actor.name }}, 
+<div class="container">
+    <div class="row">
+        {% for n in range(3) %}
+        <div class="col-sm">
+            {% if movies[index] %}
+                <h1>{{ movies[index].title }}</h1>
+                <p>{{ movies[index].runtime_minutes }} min</p>
+                <p>{{ movies[index].description }}</p>
+                <p>Genres: 
+                    {% for genre in movies[index].genres %}
+                        {% if genre != movies[index].genres[-1] %}
+                            {{ genre.name }}, 
+                        {% else %}
+                            {{ genre.name }}
+                        {% endif %}
+                    {% endfor %}
+                </p>
+                <p>Release: {{ movies[index].release_year }}</p>
+                <p>Director: {{ movies[index].director.director_full_name }}</p>
+                <p>Cast: 
+                {% for actor in movies[index].actors %}
+                    {% if actor != movies[index].actors[-1] %}
+                        {{ actor.name }}, 
+                    {% else %}
+                        {{ actor.name }}
+                    {% endif %}
+                {% endfor %}
+                </p> 
+                {% if movies[index].revenue %}
+                    <p>Revenue: ${{ movies[index].revenue }} million</p>
                 {% else %}
-                    {{ actor.name }}
+                    <p>Revenue: Unknown </p>
                 {% endif %}
-            {% endfor %}
-            <!-- <p>Actors: {{ movies[index].actors }}</p> -->
-            <p></p>
-            <p1>Genres: </p1>
-            {% for genre in movies[index].genres %}
-                {% if genre != movies[index].genres[-1] %}
-                    {{ genre.name }}, 
-                {% else %}
-                    {{ genre.name }}
-                {% endif %}
-            {% endfor %}
-            <!-- <p>Genres: {{ movies[index].genres }}</p> -->
-            <p>Run time: {{ movies[index].runtime_minutes }}</p>
-            {% if movies[index].revenue %}
-                <p>Revenue (millions): {{ movies[index].revenue }}</p>
+                <a href = "{{ url_for('movies_bp.review_a_movie', movie = movies[index].title) }}">Reviews ({{ movies[index].number_of_reviews }})</a>
             {% else %}
-                <p>Revenue (millions): Unknown </p>
+                <p>No movie found</p>
             {% endif %}
-            <a href = "{{ url_for('movies_bp.review_a_movie', movie = movies[index].title) }}">Reviews ({{ movies[index].number_of_reviews }})</a>
-        {% else %}
-            <p>No movie found</p>
-        {% endif %}
+        </div>
+        {% endfor %}
     </div>
-    <br>
-    <div>
-        <a href=" {{ first_url }}">first</a>
-        <a href=" {{ prev_url }}">prev</a>
-        <a href=" {{ next_url }}">next</a>
-        <a href=" {{ last_url }}">last</a>
-    </div>
-</main>
+  </div>
+<br>
+<div>
+    <a href=" {{ first_url }}">first</a>
+    <a href=" {{ prev_url }}">prev</a>
+    <a href=" {{ next_url }}">next</a>
+    <a href=" {{ last_url }}">last</a>
+</div>
 
 {% endblock %}
