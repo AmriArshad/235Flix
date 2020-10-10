@@ -2,7 +2,7 @@
 2020 S2 CompSci 235 practical assignment CS235Flix.
 
 ### A1
-Built a domain model for a simple movie review site.
+Built a domain model for a simple movie review site. Testing completed using pytest.
 
 ### A2
 Built a web application that relies on a repository pattern and other architectural design patterns such as Dependency Inversion and Single Responsibility. The app utilises the Flask framework and uses Jinja templating and WTForms. Flask Blueprints have also been used to maintain some level of seperation between the apps functions. All testing has been done using pytest and includes unit and end-to-end integration testing.
