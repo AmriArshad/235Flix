@@ -18,9 +18,11 @@ $ pip install -r requirements.txt
 ```
 
 If using windows run the following in root:
+```shell
 $ py -3 -m venv venv
 $ venv\Scripts\activate
 $ pip install -r requirements.txt
+```
 
 ## Testing
 From root run (make sure venv is activated):
