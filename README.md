@@ -12,19 +12,19 @@ Install virtual env and dependencies using requirements.txt.
 
 From root run in bash:
 ```shell
-python -m venv venv
-. venv/Scripts/activate
-pip install -r requirements.txt
+$ python -m venv venv
+$ . venv/Scripts/activate
+$ pip install -r requirements.txt
 ```
 
 ## Testing
 From root run (make sure venv is activated):
 ```shell
-python -m pytest
+$ python -m pytest
 ```
 
 ## Running the web app
 ```shell
-flask run
+$ flask run
 ```
 now open localhost:5000 or http://127.0.0.1:5000/

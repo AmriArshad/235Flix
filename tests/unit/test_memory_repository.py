@@ -36,11 +36,6 @@ def test_get_movies_directed_by(in_memory_repo):
     assert len(ron_clements_movies) == 2
     assert len(in_memory_repo.get_movies_directed_by(Director("fake director"))) == 0
 
-def test_get_movies_released_in(in_memory_repo):
-    movies_2016 = in_memory_repo.get_movies_released_in(2016)
-    assert len(movies_2016) == 297
-    assert len(in_memory_repo.get_movies_released_in(2020)) == 0
-
 def test_add_and_get_genre(in_memory_repo):
     in_memory_repo.add_genre(Genre("new genre"))
     assert Genre("new genre") in in_memory_repo.get_genres()

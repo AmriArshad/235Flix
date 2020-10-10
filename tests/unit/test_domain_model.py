@@ -298,10 +298,10 @@ def test_rating(review, user):
     assert repr(review.rating) == "8"
 
     review1 = Review(user, Movie("IT", 2017), "Ooo scaryyy", -1)
-    assert review1.rating == None
+    assert review1.rating == 0
 
     review1 = Review(user, Movie("Joker", 2019), "Thrilling", 11)
-    assert review1.rating == None
+    assert review1.rating == 10
 
 # the following two tests will fail at times because of slight differences in the date
 # def test_timestamp(review):
