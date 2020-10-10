@@ -1,17 +1,9 @@
-attrs==20.2.0
 Flask==1.1.2
 Flask-WTF==0.14.3
-iniconfig==1.0.1
-itsdangerous==1.1.0
 Jinja2==2.11.2
-MarkupSafe==1.1.1
 more-itertools==8.5.0
-packaging==20.4
 password-validator==1.0
-py==1.9.0
-pyparsing==2.4.7
 pytest==6.0.1
-python-dateutil==2.8.1
 python-dotenv==0.14.0
 validator==0.7.0
 Werkzeug==1.0.1
