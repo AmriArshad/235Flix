@@ -14,18 +14,16 @@
         {% for n in range(num) %}
             <div class="col-sm">
                 <h1>{{ movies[index+n].title }}</h1>
-                <p>{{ movies[index+n].runtime_minutes }} min</p>
-                <p>{{ movies[index+n].description }}</p>
-                <p>Genres: 
+                <p>{{ movies[index+n].runtime_minutes }} min | 
                     {% for genre in movies[index+n].genres %}
                         {% if genre != movies[index+n].genres[-1] %}
                             {{ genre.name }}, 
                         {% else %}
                             {{ genre.name }}
                         {% endif %}
-                    {% endfor %}
+                    {% endfor %} | {{ movies[index+n].release_year }}
                 </p>
-                <p>Release: {{ movies[index+n].release_year }}</p>
+                <p>{{ movies[index+n].description }}</p>
                 <p>Director: {{ movies[index+n].director.director_full_name }}</p>
                 <p>Cast: 
                 {% for actor in movies[index+n].actors %}

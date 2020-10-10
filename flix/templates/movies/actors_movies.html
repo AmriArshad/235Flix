@@ -12,18 +12,16 @@
             {% for movie in movies %}
                 <div class="col-4">
                     <h2>{{ movie.title }}</h2>
-                    <p>{{ movie.runtime_minutes }} min</p>
-                    <p>{{ movie.description }}</p>
-                    <p>Genres: 
+                    <p>{{ movie.runtime_minutes }} min | 
                         {% for genre in movie.genres %}
                             {% if genre != movie.genres[-1] %}
                                 {{ genre.name }}, 
                             {% else %}
                                 {{ genre.name }}
                             {% endif %}
-                        {% endfor %}
+                        {% endfor %} | {{ movie.release_year }}
                     </p>
-                    <p>Release: {{ movie.release_year }}</p>
+                    <p>{{ movie.description }}</p>
                     <p>Director: {{ movie.director.director_full_name }}</p>
                     <p>Cast: 
                     {% for actor in movie.actors %}
