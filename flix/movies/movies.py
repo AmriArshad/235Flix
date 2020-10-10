@@ -262,7 +262,7 @@ class ProfanityFree:
             raise ValidationError(self.message)
 
 class ReviewForm(FlaskForm):
-    review = TextAreaField('Review', [DataRequired(), Length(min = 3, message = 'your review is too short'), ProfanityFree(message = 'Your review must not contain profanity')])
+    review = TextAreaField('Add a review', [DataRequired(), Length(min = 3, message = 'your review is too short'), ProfanityFree(message = 'Your review must not contain profanity')])
     rating = IntegerField('Rating', [DataRequired()])
     movie_title = HiddenField('Movie title')
     submit = SubmitField('Submit')
