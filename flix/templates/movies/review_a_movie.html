@@ -3,9 +3,6 @@
 {% block content %}
 
 <main id="main">
-    <!-- <header>
-        <h1>{{date}}</h1>
-    </header> -->
     <div style="clear:both">
         </a>
         <h2>{{movie.title}}</h2>
@@ -29,11 +26,15 @@
         </div>
         <div style="clear:both">
             <h3>Reviews:</h3>
-            {% for review in movie.reviews %}
-                <p>{{review.rating}}/10</p>
-                <p>{{review.username.user_name}} {{review.timestamp}}</p>
-                <p>{{review.review_text}}</p>
-            {% endfor %}
+            {% if movie.reviews != [] %}
+                {% for review in movie.reviews %}
+                    <p>{{review.rating}}/10</p>
+                    <p>{{review.username.user_name}} {{review.timestamp}}</p>
+                    <p>{{review.review_text}}</p>
+                {% endfor %}
+            {% else %}
+                <p>No reviews found :(</p>
+            {% endif %}
         </div>
     </article>
 </main>
