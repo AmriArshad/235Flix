@@ -19,9 +19,6 @@ def home():
         'home.html',
         random_movies = random_movies,
         movieSearch = movieByTitle(),
-        actorSearch = movieByActor(),
-        genreSearch = movieByGenre(),
-        directorSearch = movieByDirector(),
     )
 
 @movies_blueprint.route('/browse')
@@ -38,9 +35,6 @@ def browse_movies():
         next_url = url_for('movies_bp.view', index = repo.repo_instance.index + 3, length = length),
         last_url = url_for('movies_bp.view', index = length, length = length),
         movieSearch = movieByTitle(),
-        actorSearch = movieByActor(),
-        genreSearch = movieByGenre(),
-        directorSearch = movieByDirector(),
     )
 
 @movies_blueprint.route('/view', methods = ['GET'])
@@ -66,26 +60,17 @@ def find_movie():
                 'movies/list_movie.html',
                 movie = movies[0],
                 movieSearch = movieByTitle(),
-                actorSearch = movieByActor(),
-                genreSearch = movieByGenre(),
-                directorSearch = movieByDirector(),
             )
         else:
             return render_template(
                 'movies/searched_movies.html',
                 movies = movies,
                 movieSearch = movieByTitle(),
-                actorSearch = movieByActor(),
-                genreSearch = movieByGenre(),
-                directorSearch = movieByDirector(),
             )
 
     return render_template(
         'movies/find_movie.html',
         movieSearch = movieSearch,
-        actorSearch = movieByActor(),
-        genreSearch = movieByGenre(),
-        directorSearch = movieByDirector(),
     )
 
 @movies_blueprint.route('/display', methods = ['GET'])
@@ -101,9 +86,6 @@ def list_movie():
         'movies/list_movie.html',
         movie = movie,
         movieSearch = movieByTitle(),
-        actorSearch = movieByActor(),
-        genreSearch = movieByGenre(),
-        directorSearch = movieByDirector(),
     )
 
 @movies_blueprint.route('/browse-actor', methods = ['GET', 'POST'])
@@ -122,9 +104,6 @@ def browse_by_actor():
                 movies = movies,
                 actor = post_actor,
                 movieSearch = movieByTitle(),
-                actorSearch = movieByActor(),
-                genreSearch = movieByGenre(),
-                directorSearch = movieByDirector(),
             )
         else:
             return render_template(
@@ -132,9 +111,6 @@ def browse_by_actor():
                 movies = movies,
                 actor = None,
                 movieSearch = movieByTitle(),
-                actorSearch = movieByActor(),
-                genreSearch = movieByGenre(),
-                directorSearch = movieByDirector(),
             )
 
     return render_template(
@@ -143,8 +119,6 @@ def browse_by_actor():
         random_actors = random_actors,
         movieSearch = movieByTitle(),
         actorSearch = actorsMovies,
-        genreSearch = movieByGenre(),
-        directorSearch = movieByDirector(),
     )
 
 @movies_blueprint.route('/browse-genre', methods = ['GET', 'POST'])
@@ -154,17 +128,23 @@ def browse_by_genre():
     random_genres = repo.repo_instance.get_random_genres(3)
 
     if genreMovies.validate_on_submit():
+        repo.repo_instance.genre_index = 0
         post_genre = Genre(genreMovies.genre_name.data)
-        movies = repo.repo_instance.get_movies_in_genre(post_genre)
+        total_movies = repo.repo_instance.get_movies_in_genre(post_genre)
+        movies = [total_movies[x:x+45] for x in range(0, len(total_movies), 45)]
+        length = len(movies)-1
 
         return render_template(
             'movies/genres_movies.html',
-            movies = movies,
+            movies = movies[repo.repo_instance.genre_index],
             genre = post_genre,
+            length = length,
+            first_url = url_for('movies_bp.genre_view', index = 0, length = length, genre = post_genre.name),
+            prev_url = url_for('movies_bp.genre_view', index = repo.repo_instance.genre_index - 1, length = length, genre = post_genre.name),
+            next_url = url_for('movies_bp.genre_view', index = repo.repo_instance.genre_index + 1, length = length, genre = post_genre.name),
+            last_url = url_for('movies_bp.genre_view', index = length, length = length, genre = post_genre.name),
             movieSearch = movieByTitle(),
-            actorSearch = movieByActor(),
             genreSearch = genreMovies,
-            directorSearch = movieByDirector(),
         )
 
     return render_template(
@@ -173,10 +153,34 @@ def browse_by_genre():
         random_movies = random_movies,
         random_genres = random_genres,
         movieSearch = movieByTitle(),
-        actorSearch = movieByActor(),
         genreSearch = genreMovies,
-        directorSearch = movieByDirector(),
     )
+
+@movies_blueprint.route('/genre_view', methods = ['GET'])
+def genre_view():
+    index = int(request.args.get('index'))
+    genre = Genre(request.args.get('genre'))
+    length = int(request.args.get('length'))
+
+    total_movies = repo.repo_instance.get_movies_in_genre(genre)
+    movies = [total_movies[x:x+45] for x in range(0, len(total_movies), 45)]
+
+    if repo.repo_instance.genre_index == 0 and index <= -1 or repo.repo_instance.genre_index == length and index >= length:
+        pass
+    else:
+        repo.repo_instance.genre_index = index
+
+    return render_template(
+            'movies/genres_movies.html',
+            movies = movies[repo.repo_instance.genre_index],
+            genre = genre,
+            length = length,
+            first_url = url_for('movies_bp.genre_view', index = 0, length = length, genre = genre.name),
+            prev_url = url_for('movies_bp.genre_view', index = repo.repo_instance.genre_index - 1, length = length, genre = genre.name),
+            next_url = url_for('movies_bp.genre_view', index = repo.repo_instance.genre_index + 1, length = length, genre = genre.name),
+            last_url = url_for('movies_bp.genre_view', index = length, length = length, genre = genre.name),
+            movieSearch = movieByTitle(),
+        )
 
 @movies_blueprint.route('/browse-director', methods = ['GET', 'POST'])
 def browse_by_director():
@@ -194,9 +198,6 @@ def browse_by_director():
                 movies = movies,
                 director = post_director,
                 movieSearch = movieByTitle(),
-                actorSearch = movieByActor(),
-                genreSearch = movieByGenre(),
-                directorSearch = movieByDirector(),
             )
         else:
             return render_template(
@@ -204,9 +205,6 @@ def browse_by_director():
                 movies = movies,
                 director = None,
                 movieSearch = movieByTitle(),
-                actorSearch = movieByActor(),
-                genreSearch = movieByGenre(),
-                directorSearch = movieByDirector(),
             )
     
     return render_template(
@@ -215,8 +213,6 @@ def browse_by_director():
         random_movies = random_movies,
         random_directors = random_directors,
         movieSearch = movieByTitle(),
-        actorSearch = movieByActor(),
-        genreSearch = movieByGenre(),
         directorSearch = directorMovies,
     )
 
@@ -252,9 +248,6 @@ def review_a_movie():
         movie = movie,
         form = form,
         movieSearch = movieByTitle(),
-        actorSearch = movieByActor(),
-        genreSearch = movieByGenre(),
-        directorSearch = movieByDirector(),
     )
 
 class movieByTitle(FlaskForm):

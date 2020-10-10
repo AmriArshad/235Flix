@@ -14,6 +14,7 @@ class MemoryRepository(AbstractRepository):
         self.__users = list()
         self.__reviews = list()
         self.index = 0
+        self.genre_index = 0
 
     def add_user(self, user: User):
         self.__users.append(user)
