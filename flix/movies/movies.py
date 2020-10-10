@@ -13,9 +13,15 @@ movies_blueprint = Blueprint('movies_bp', __name__)
 
 @movies_blueprint.route('/')
 def home(): 
+    random_movies = repo.repo_instance.get_random_movies(4)
+
     return render_template(
         'home.html',
-        searchForm = movieByTitle()
+        random_movies = random_movies,
+        movieSearch = movieByTitle(),
+        actorSearch = movieByActor(),
+        genreSearch = movieByGenre(),
+        directorSearch = movieByDirector(),
     )
 
 @movies_blueprint.route('/browse')
@@ -31,12 +37,17 @@ def browse_movies():
         prev_url = url_for('movies_bp.view', index = repo.repo_instance.index - 3, length = length),
         next_url = url_for('movies_bp.view', index = repo.repo_instance.index + 3, length = length),
         last_url = url_for('movies_bp.view', index = length, length = length),
-        searchForm = movieByTitle()
+        movieSearch = movieByTitle(),
+        actorSearch = movieByActor(),
+        genreSearch = movieByGenre(),
+        directorSearch = movieByDirector(),
     )
     
 @movies_blueprint.route('/browse-actor', methods = ['GET', 'POST'])
 def browse_by_actor():
     actorsMovies = movieByActor()
+    random_movies = repo.repo_instance.get_random_movies(4)
+    random_actors = repo.repo_instance.get_random_actors(9)
 
     if actorsMovies.validate_on_submit():
         post_actor = Actor(actorsMovies.actor_name.data)
@@ -46,20 +57,27 @@ def browse_by_actor():
             'movies/actors_movies.html',
             movies = movies,
             actor = post_actor,
-            searchForm = movieByTitle()
+            movieSearch = movieByTitle(),
+            actorSearch = movieByActor(),
+            genreSearch = movieByGenre(),
+            directorSearch = movieByDirector(),
         )
 
     return render_template(
         'movies/get_actor.html',
-        form = actorsMovies,
-        searchForm = movieByTitle()
+        random_movies = random_movies,
+        random_actors = random_actors,
+        movieSearch = movieByTitle(),
+        actorSearch = actorsMovies,
+        genreSearch = movieByGenre(),
+        directorSearch = movieByDirector(),
     )
 
 @movies_blueprint.route('/browse-genre', methods = ['GET', 'POST'])
 def browse_by_genre():
-    # genres = repo.repo_instance.get_genres()
     genreMovies = movieByGenre()
-    genreMovies.genre_name.choices = [""] + [genre.name for genre in repo.repo_instance.get_genres()]
+    random_movies = repo.repo_instance.get_random_movies(4)
+    random_genres = repo.repo_instance.get_random_genres(3)
 
     if genreMovies.validate_on_submit():
         post_genre = Genre(genreMovies.genre_name.data)
@@ -69,18 +87,28 @@ def browse_by_genre():
             'movies/genres_movies.html',
             movies = movies,
             genre = post_genre,
-            searchForm = movieByTitle()
+            movieSearch = movieByTitle(),
+            actorSearch = movieByActor(),
+            genreSearch = genreMovies,
+            directorSearch = movieByDirector(),
         )
 
     return render_template(
         'movies/get_genre.html',
         form = genreMovies,
-        searchForm = movieByTitle()
+        random_movies = random_movies,
+        random_genres = random_genres,
+        movieSearch = movieByTitle(),
+        actorSearch = movieByActor(),
+        genreSearch = genreMovies,
+        directorSearch = movieByDirector(),
     )
 
 @movies_blueprint.route('/browse-director', methods = ['GET', 'POST'])
 def browse_by_director():
     directorMovies = movieByDirector()
+    random_movies = repo.repo_instance.get_random_movies(4)
+    random_directors = repo.repo_instance.get_random_directors(9)
 
     if directorMovies.validate_on_submit():
         post_director = Director(directorMovies.director_name.data)
@@ -90,13 +118,21 @@ def browse_by_director():
             'movies/directors_movies.html',
             movies = movies,
             director = post_director,
-            searchForm = movieByTitle()
+            movieSearch = movieByTitle(),
+            actorSearch = movieByActor(),
+            genreSearch = movieByGenre(),
+            directorSearch = movieByDirector(),
         )
     
     return render_template(
         'movies/get_director.html',
         form = directorMovies,
-        searchForm = movieByTitle()
+        random_movies = random_movies,
+        random_directors = random_directors,
+        movieSearch = movieByTitle(),
+        actorSearch = movieByActor(),
+        genreSearch = movieByGenre(),
+        directorSearch = directorMovies,
     )
 
 @movies_blueprint.route('/find', methods = ['GET', 'POST'])
@@ -110,18 +146,27 @@ def find_movie():
             return render_template(
                 'movies/list_movie.html',
                 movie = movies[0],
-                searchForm = movieByTitle()
+                movieSearch = movieByTitle(),
+                actorSearch = movieByActor(),
+                genreSearch = movieByGenre(),
+                directorSearch = movieByDirector(),
             )
         else:
             return render_template(
                 'movies/searched_movies.html',
                 movies = movies,
-                searchForm = movieByTitle()
+                movieSearch = movieByTitle(),
+                actorSearch = movieByActor(),
+                genreSearch = movieByGenre(),
+                directorSearch = movieByDirector(),
             )
 
     return render_template(
         'movies/find_movie.html',
-        form = movieSearch
+        movieSearch = movieSearch,
+        actorSearch = movieByActor(),
+        genreSearch = movieByGenre(),
+        directorSearch = movieByDirector(),
     )
 
 @movies_blueprint.route('/view', methods = ['GET'])
@@ -147,7 +192,10 @@ def list_movie():
     return render_template(
         'movies/list_movie.html',
         movie = movie,
-        searchForm = movieByTitle()
+        movieSearch = movieByTitle(),
+        actorSearch = movieByActor(),
+        genreSearch = movieByGenre(),
+        directorSearch = movieByDirector(),
     )
 
 @movies_blueprint.route('/review', methods = ['GET', 'POST'])
@@ -181,9 +229,12 @@ def review_a_movie():
         title = 'Edit movie',
         movie = movie,
         form = form,
-        searchForm = movieByTitle()
+        movieSearch = movieByTitle(),
+        actorSearch = movieByActor(),
+        genreSearch = movieByGenre(),
+        directorSearch = movieByDirector(),
     )
-        
+
 class movieByTitle(FlaskForm):
     movie_title = StringField('Search:', [DataRequired()])
     submit = SubmitField('Search')
@@ -193,7 +244,7 @@ class movieByActor(FlaskForm):
     submit = SubmitField('Find movies')
 
 class movieByGenre(FlaskForm):
-    genre_name = SelectField('Genre: ', [DataRequired()])
+    genre_name = SelectField('Select a genre: ', [DataRequired()], choices = [""] + [genre.name for genre in repo.repo_instance.get_genres()])
     submit = SubmitField('Find movies')
 
 class movieByDirector(FlaskForm):

@@ -34,7 +34,10 @@ def register():
         username_error_message = username_not_unique,
         password_error_message = None,
         handler_url = url_for('authentication_bp.register'),
-        searchForm = movies.movieByTitle()
+        movieSearch = movies.movieByTitle(),
+        actorSearch = movies.movieByActor(),
+        genreSearch = movies.movieByGenre(),
+        directorSearch = movies.movieByDirector(),
     )
 
 @authentication_blueprint.route('/login', methods = ['GET', 'POST'])
@@ -63,7 +66,10 @@ def login():
         form = form,
         username_error_message = username_not_recognised,
         password_error_message = password_does_not_match_username,
-        searchForm = movies.movieByTitle()
+        movieSearch = movies.movieByTitle(),
+        actorSearch = movies.movieByActor(),
+        genreSearch = movies.movieByGenre(),
+        directorSearch = movies.movieByDirector(),
     )
 
 @authentication_blueprint.route('/logout')

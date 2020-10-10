@@ -1,0 +1,11 @@
+<div class="container">
+    <p class="lead">Popular directors:</p>
+    <br>
+    <div class="row">
+        {% for director in random_directors %}
+            <div class="col-4">
+                <p>{{director.director_full_name}}</p>
+            </div>
+        {% endfor %}
+    </div>
+</div>

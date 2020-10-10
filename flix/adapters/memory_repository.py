@@ -1,4 +1,5 @@
 from datetime import datetime
+import random
 
 from flix.datafilereaders.movie_file_csv_reader import MovieFileCSVReader
 from flix.domain.model import Director, Genre, Actor, Movie, Review, User, WatchList
@@ -32,6 +33,11 @@ class MemoryRepository(AbstractRepository):
     def get_number_of_movies(self) -> int:
         return len(self.__movies)
 
+    def get_random_movies(self, quantity):
+        indexes = random.sample(range(0, len(self.__movies)), quantity)
+        movies = [self.__movies[i] for i in indexes]
+        return movies
+
     def get_movies_by_title(self, search_item) -> Movie:
         return [movie for movie in self.__movies if search_item.lower() in movie.title.lower()]
 
@@ -53,17 +59,32 @@ class MemoryRepository(AbstractRepository):
     def get_genres(self):
         return self.__genres
 
+    def get_random_genres(self, quantity):
+        indexes = random.sample(range(0, len(self.__genres)), quantity)
+        genres = [self.__genres[i] for i in indexes]
+        return genres
+
     def add_director(self, director: Director):
         self.__directors.append(director)
 
     def get_directors(self):
         return self.__directors
 
+    def get_random_directors(self, quantity):
+        indexes = random.sample(range(0, len(self.__directors)), quantity)
+        directors = [self.__directors[i] for i in indexes]
+        return directors
+
     def add_actor(self, actor: Actor):
         self.__actors.append(actor)
 
     def get_actors(self):
         return self.__actors
+
+    def get_random_actors(self, quantity):
+        indexes = random.sample(range(0, len(self.__actors)), quantity)
+        actors = [self.__actors[i] for i in indexes]
+        return actors
 
     def add_review(self, review: Review):
         super().add_review(review)

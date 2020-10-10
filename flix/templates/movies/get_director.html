@@ -2,15 +2,19 @@
 
 {% block content %}
 
-<main>
-    <div>
-        <form method="POST" action="{{ url_for('movies_bp.browse_by_director') }}">
-            {{ form.csrf_token }}
-            <div>
-                {{ form.director_name.label }} {{ form.director_name }} {{ form.submit }}
-            </div>
-        </form>
-    </div>  
-</main>
+<div>
+    <form method="POST" action="{{ url_for('movies_bp.browse_by_director') }}">
+        {{ directorSearch.csrf_token }}
+        <div>
+            {{ directorSearch.director_name(placeholder="Enter a director") }} {{ directorSearch.submit }}
+        </div>
+    </form>
+</div>
+
+<br>
+{% include 'movies/random_directors.html' %}
+
+<br>
+{% include 'movies/random_movies.html' %}
 
 {% endblock %}

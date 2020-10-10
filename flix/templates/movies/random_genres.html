@@ -1,0 +1,11 @@
+<div class="container">
+    <p class="lead">Popular genres:</p>
+    <br>
+    <div class="row">
+        {% for genre in random_genres %}
+            <div class="col-4">
+                <p>{{genre.name}}</p>
+            </div>
+        {% endfor %}
+    </div>
+</div>

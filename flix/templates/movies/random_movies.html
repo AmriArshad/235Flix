@@ -1,0 +1,41 @@
+<div class="container">
+    <p class="lead">Editors picks:</p>
+    <br>
+    <div class="row">
+        {% for n in range(4) %}
+            <div class="col-6">
+                <h2>{{ random_movies[n].title }}</h2>
+                <p>{{ random_movies[n].runtime_minutes }} min</p>
+                <p>{{ random_movies[n].description }}</p>
+                <p>Genres: 
+                    {% for genre in random_movies[n].genres %}
+                        {% if genre != random_movies[n].genres[-1] %}
+                            {{ genre.name }}, 
+                        {% else %}
+                            {{ genre.name }}
+                        {% endif %}
+                    {% endfor %}
+                </p>
+                <p>Release: {{ random_movies[n].release_year }}</p>
+                <p>Director: {{ random_movies[n].director.director_full_name }}</p>
+                <p>Cast: 
+                {% for actor in random_movies[n].actors %}
+                    {% if actor != random_movies[n].actors[-1] %}
+                        {{ actor.name }}, 
+                    {% else %}
+                        {{ actor.name }}
+                    {% endif %}
+                {% endfor %}
+                </p> 
+                {% if random_movies[n].revenue %}
+                    <p>Revenue: ${{ random_movies[n].revenue }} million</p>
+                {% else %}
+                    <p>Revenue: Unknown </p>
+                {% endif %}
+                <a href = "{{ url_for('movies_bp.review_a_movie', movie = random_movies[n].title) }}">Reviews ({{ random_movies[n].number_of_reviews }})</a>
+                <br>
+                <br>
+            </div>
+        {% endfor %}
+    </div>
+</div>

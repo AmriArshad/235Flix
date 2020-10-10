@@ -1,0 +1,11 @@
+<div class="container">
+    <p class="lead">Popular actors:</p>
+    <br>
+    <div class="row">
+        {% for actor in random_actors %}
+            <div class="col-4">
+                <p>{{actor.name}}</p>
+            </div>
+        {% endfor %}
+    </div>
+</div>

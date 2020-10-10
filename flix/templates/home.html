@@ -2,13 +2,15 @@
 
 {% block content %}
 
-<main role="main" class="container">
+<div class="text-center">
+  <h1>Welcome to 235Flix!</h1>
+</div>
 
-    <div class="text-center">
-      <h1>Welcome!</h1>
-      <p class="lead">Movies for you:</p>
-    </div>
+{% include 'movies/random_movies.html' %}
+<br>
 
-</main>
+<div class="text-center">
+  <p class="lead">To find more movies click browse at the top!</p>
+</div>
 
 {% endblock %}

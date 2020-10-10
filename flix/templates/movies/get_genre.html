@@ -2,15 +2,19 @@
 
 {% block content %}
 
-<main>
-    <div>
-        <form method="POST" action="{{ url_for('movies_bp.browse_by_genre') }}">
-            {{ form.csrf_token }}
-            <div>
-                {{ form.genre_name.label }} {{ form.genre_name }} {{ form.submit }}
-            </div>
-        </form>
-    </div>  
-</main>
+<div>
+    <form method="POST" action="{{ url_for('movies_bp.browse_by_genre') }}">
+        {{ genreSearch.csrf_token }}
+        <div>
+            {{ genreSearch.genre_name.label }} {{ genreSearch.genre_name }} {{ genreSearch.submit }}
+        </div>
+    </form>
+</div>
+
+<br>
+{% include 'movies/random_genres.html' %}
+
+<br>
+{% include 'movies/random_movies.html' %}
 
 {% endblock %}

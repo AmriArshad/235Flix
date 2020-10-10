@@ -15,11 +15,11 @@
                   <a class="dropdown-item" href = "{{ url_for('movies_bp.browse_by_director') }}">Movies by director</a>
                 </div>
             </li>
-
         </ul>
-        {% include 'movies/find_movie.html' %}    
-        <ul class="navbar-nav">
 
+        {% include 'movies/find_movie.html' %}
+
+        <ul class="navbar-nav">
             {% if 'username' in session %}
                 <li class="nav-item active">
                     <a class="nav-link" >Logged in as: {{ session['username'] }}</a>

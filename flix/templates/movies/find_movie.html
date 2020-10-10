@@ -1,8 +1,8 @@
 <div>
     <form method="POST" action="{{ url_for('movies_bp.find_movie') }}">
-        {{ searchForm.csrf_token }}
+        {{ movieSearch.csrf_token }}
         <div>
-            {{ searchForm.movie_title(placeholder="find movies") }} {{ searchForm.submit }}
+            {{ movieSearch.movie_title(placeholder="find movies") }} {{ movieSearch.submit }}
         </div>
     </form>
 </div>
