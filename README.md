@@ -1,6 +1,12 @@
 # CS235Flix
 2020 S2 CompSci 235 practical assignment CS235Flix.
 
+### A1
+Built domain model
+
+### A2
+Built web app that relies on a repository pattern
+
 ## Setup
 Install virtual env and dependencies using requirements.txt.
 
@@ -11,29 +17,10 @@ python -m venv venv
 pip install -r requirements.txt
 ```
 
-### A1
-Completed the following class objects:
-- Actor
-- Director
-- Genre
-- Movie
-- Review
-- User
-- WatchList
-- MovieFileCSVReader
-
-Completed testing for these classes under /tests
-
-### Extensions:
-
-- Added revenue to Movie class
-- Added all values to Movie objects in MovieFileCSVReader.dataset_of_movies
-- Added relevent testing for above
-
 ## Testing
 From root run (make sure venv is activated):
 ```shell
-py.test -v
+python -m pytest
 ```
 
 ## Running the web app
