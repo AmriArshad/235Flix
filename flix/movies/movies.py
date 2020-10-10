@@ -42,7 +42,70 @@ def browse_movies():
         genreSearch = movieByGenre(),
         directorSearch = movieByDirector(),
     )
+
+@movies_blueprint.route('/view', methods = ['GET'])
+def view():
+    index = int(request.args.get('index'))
+    length = int(request.args.get('length'))
+
+    if repo.repo_instance.index == 0 and index <= -1 or repo.repo_instance.index == length and index >= length:
+        pass
+    else:
+        repo.repo_instance.index = index
+    return browse_movies()
+
+@movies_blueprint.route('/find', methods = ['GET', 'POST'])
+def find_movie():
+    movieSearch = movieByTitle()
+
+    if movieSearch.validate_on_submit():
+        post_title = movieSearch.movie_title
+        movies = repo.repo_instance.get_movies_by_title(post_title.data)
+        if len(movies) == 1:
+            return render_template(
+                'movies/list_movie.html',
+                movie = movies[0],
+                movieSearch = movieByTitle(),
+                actorSearch = movieByActor(),
+                genreSearch = movieByGenre(),
+                directorSearch = movieByDirector(),
+            )
+        else:
+            return render_template(
+                'movies/searched_movies.html',
+                movies = movies,
+                movieSearch = movieByTitle(),
+                actorSearch = movieByActor(),
+                genreSearch = movieByGenre(),
+                directorSearch = movieByDirector(),
+            )
+
+    return render_template(
+        'movies/find_movie.html',
+        movieSearch = movieSearch,
+        actorSearch = movieByActor(),
+        genreSearch = movieByGenre(),
+        directorSearch = movieByDirector(),
+    )
+
+@movies_blueprint.route('/display', methods = ['GET'])
+def list_movie():
+    movie = None
+    movie_name = request.args.get('movie')
+    for movie in repo.repo_instance.get_movies():
+        if movie_name.lower() == movie.title.lower():
+            movie = movie
+            break
     
+    return render_template(
+        'movies/list_movie.html',
+        movie = movie,
+        movieSearch = movieByTitle(),
+        actorSearch = movieByActor(),
+        genreSearch = movieByGenre(),
+        directorSearch = movieByDirector(),
+    )
+
 @movies_blueprint.route('/browse-actor', methods = ['GET', 'POST'])
 def browse_by_actor():
     actorsMovies = movieByActor()
@@ -155,69 +218,6 @@ def browse_by_director():
         actorSearch = movieByActor(),
         genreSearch = movieByGenre(),
         directorSearch = directorMovies,
-    )
-
-@movies_blueprint.route('/find', methods = ['GET', 'POST'])
-def find_movie():
-    movieSearch = movieByTitle()
-
-    if movieSearch.validate_on_submit():
-        post_title = movieSearch.movie_title
-        movies = repo.repo_instance.get_movies_by_title(post_title.data)
-        if len(movies) == 1:
-            return render_template(
-                'movies/list_movie.html',
-                movie = movies[0],
-                movieSearch = movieByTitle(),
-                actorSearch = movieByActor(),
-                genreSearch = movieByGenre(),
-                directorSearch = movieByDirector(),
-            )
-        else:
-            return render_template(
-                'movies/searched_movies.html',
-                movies = movies,
-                movieSearch = movieByTitle(),
-                actorSearch = movieByActor(),
-                genreSearch = movieByGenre(),
-                directorSearch = movieByDirector(),
-            )
-
-    return render_template(
-        'movies/find_movie.html',
-        movieSearch = movieSearch,
-        actorSearch = movieByActor(),
-        genreSearch = movieByGenre(),
-        directorSearch = movieByDirector(),
-    )
-
-@movies_blueprint.route('/view', methods = ['GET'])
-def view():
-    index = int(request.args.get('index'))
-    length = int(request.args.get('length'))
-
-    if repo.repo_instance.index == 0 and index <= -1 or repo.repo_instance.index == length and index >= length:
-        pass
-    else:
-        repo.repo_instance.index = index
-    return browse_movies()
-
-@movies_blueprint.route('/display', methods = ['GET'])
-def list_movie():
-    movie = None
-    movie_name = request.args.get('movie')
-    for movie in repo.repo_instance.get_movies():
-        if movie_name.lower() == movie.title.lower():
-            movie = movie
-            break
-    
-    return render_template(
-        'movies/list_movie.html',
-        movie = movie,
-        movieSearch = movieByTitle(),
-        actorSearch = movieByActor(),
-        genreSearch = movieByGenre(),
-        directorSearch = movieByDirector(),
     )
 
 @movies_blueprint.route('/review', methods = ['GET', 'POST'])
