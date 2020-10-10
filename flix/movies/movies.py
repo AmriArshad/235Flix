@@ -53,15 +53,26 @@ def browse_by_actor():
         post_actor = Actor(actorsMovies.actor_name.data)
         movies = repo.repo_instance.get_movies_acted_by(post_actor)
 
-        return render_template(
-            'movies/actors_movies.html',
-            movies = movies,
-            actor = post_actor,
-            movieSearch = movieByTitle(),
-            actorSearch = movieByActor(),
-            genreSearch = movieByGenre(),
-            directorSearch = movieByDirector(),
-        )
+        if movies != []:
+            return render_template(
+                'movies/actors_movies.html',
+                movies = movies,
+                actor = post_actor,
+                movieSearch = movieByTitle(),
+                actorSearch = movieByActor(),
+                genreSearch = movieByGenre(),
+                directorSearch = movieByDirector(),
+            )
+        else:
+            return render_template(
+                'movies/actors_movies.html',
+                movies = movies,
+                actor = None,
+                movieSearch = movieByTitle(),
+                actorSearch = movieByActor(),
+                genreSearch = movieByGenre(),
+                directorSearch = movieByDirector(),
+            )
 
     return render_template(
         'movies/get_actor.html',
@@ -114,15 +125,26 @@ def browse_by_director():
         post_director = Director(directorMovies.director_name.data)
         movies = repo.repo_instance.get_movies_directed_by(post_director)
 
-        return render_template(
-            'movies/directors_movies.html',
-            movies = movies,
-            director = post_director,
-            movieSearch = movieByTitle(),
-            actorSearch = movieByActor(),
-            genreSearch = movieByGenre(),
-            directorSearch = movieByDirector(),
-        )
+        if movies != []:
+            return render_template(
+                'movies/directors_movies.html',
+                movies = movies,
+                director = post_director,
+                movieSearch = movieByTitle(),
+                actorSearch = movieByActor(),
+                genreSearch = movieByGenre(),
+                directorSearch = movieByDirector(),
+            )
+        else:
+            return render_template(
+                'movies/directors_movies.html',
+                movies = movies,
+                director = None,
+                movieSearch = movieByTitle(),
+                actorSearch = movieByActor(),
+                genreSearch = movieByGenre(),
+                directorSearch = movieByDirector(),
+            )
     
     return render_template(
         'movies/get_director.html',
