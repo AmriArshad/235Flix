@@ -5,11 +5,12 @@
 <main>
     {% if movies != [] %}
     <h2>Results:</h2>
-    <ul>
-        {% for movie in movies %}
-            <li><a href="{{ url_for('movies_bp.list_movie', movie = movie.title) }}">{{ movie.title }}</li>
-        {% endfor %}
-    </ul>
+    <br>
+    
+    {% for movie in movies %}
+        <p><a href="{{ url_for('movies_bp.list_movie', movie = movie.title) }}">{{ movie.title }}</p>
+    {% endfor %}
+
     {% else %}
     <p>No movies found.</p>
     {% endif %}

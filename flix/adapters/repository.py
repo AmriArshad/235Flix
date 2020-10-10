@@ -66,12 +66,6 @@ class AbstractRepository(abc.ABC):
         raise NotImplementedError
 
     @abc.abstractmethod
-    def get_movies_released_in(self, release_year: int):
-        # returns a list of movies released in release_year
-        # if there are no matches, return empty list
-        raise NotImplementedError
-
-    @abc.abstractmethod
     def add_genre(self, genre: Genre):
         # adds a Genre to the repo
         raise NotImplementedError

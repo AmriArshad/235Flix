@@ -5,13 +5,14 @@
 <main>
     {% if genre %}
     <h2>Movies in the {{ genre.name }} genre:</h2>
-    <ul>
+    <br>
+    <div class="row">
         {% for movie in movies %}
-            <li><a href="{{ url_for('movies_bp.list_movie', movie = movie.title) }}">{{ movie.title }}</li>
+            <div class="col-4">
+                <p><a href="{{ url_for('movies_bp.list_movie', movie = movie.title) }}">{{ movie.title }}</p>
+            </div>
         {% endfor %}
-    </ul>
-    {% else %}
-    <p>Genre not found.</p>
+    </div>
     {% endif %}
 </main>
 

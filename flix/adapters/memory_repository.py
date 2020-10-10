@@ -39,19 +39,16 @@ class MemoryRepository(AbstractRepository):
         return movies
 
     def get_movies_by_title(self, search_item) -> Movie:
-        return [movie for movie in self.__movies if search_item.lower() in movie.title.lower()]
+        return sorted([movie for movie in self.__movies if search_item.lower() in movie.title.lower()])
 
     def get_movies_acted_by(self, actor: Actor):
-        return [movie for movie in self.__movies if actor in movie.actors]
+        return sorted([movie for movie in self.__movies if actor in movie.actors])
 
     def get_movies_in_genre(self, genre: Genre):
-        return [movie for movie in self.__movies if genre in movie.genres]
+        return sorted([movie for movie in self.__movies if genre in movie.genres])
 
     def get_movies_directed_by(self, director: Director):
-        return [movie for movie in self.__movies if movie.director == director]
-
-    def get_movies_released_in(self, release_year: int):
-        return [movie for movie in self.__movies if movie.release_year == release_year]
+        return sorted([movie for movie in self.__movies if movie.director == director])
 
     def add_genre(self, genre: Genre):
         self.__genres.append(genre)

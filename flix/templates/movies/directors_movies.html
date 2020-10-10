@@ -5,11 +5,48 @@
 <main>
     {% if director %}
     <h2>{{ director.director_full_name }}'s movies:</h2>
-    <ul>
-        {% for movie in movies %}
-            <li><a href="{{ url_for('movies_bp.list_movie', movie = movie.title) }}">{{ movie.title }}</li>
-        {% endfor %}
-    </ul>
+    
+    <div class="container">
+        <br>
+        <div class="row">
+            {% for movie in movies %}
+                <div class="col-4">
+                    <h2>{{ movie.title }}</h2>
+                    <p>{{ movie.runtime_minutes }} min</p>
+                    <p>{{ movie.description }}</p>
+                    <p>Genres: 
+                        {% for genre in movie.genres %}
+                            {% if genre != movie.genres[-1] %}
+                                {{ genre.name }}, 
+                            {% else %}
+                                {{ genre.name }}
+                            {% endif %}
+                        {% endfor %}
+                    </p>
+                    <p>Release: {{ movie.release_year }}</p>
+                    <p>Director: {{ movie.director.director_full_name }}</p>
+                    <p>Cast: 
+                    {% for actor in movie.actors %}
+                        {% if actor != movie.actors[-1] %}
+                            {{ actor.name }}, 
+                        {% else %}
+                            {{ actor.name }}
+                        {% endif %}
+                    {% endfor %}
+                    </p> 
+                    {% if movie.revenue %}
+                        <p>Revenue: ${{ movie.revenue }} million</p>
+                    {% else %}
+                        <p>Revenue: Unknown </p>
+                    {% endif %}
+                    <a href = "{{ url_for('movies_bp.review_a_movie', movie = movie.title) }}">Reviews ({{ movie.number_of_reviews }})</a>
+                    <br>
+                    <br>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    
     {% else %}
     <p>Director not found.</p>
     {% endif %}
