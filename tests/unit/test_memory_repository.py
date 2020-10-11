@@ -13,12 +13,12 @@ def test_add_and_get_user(in_memory_repo):
     assert in_memory_repo.get_user("fake user") is None
 
 def test_add_and_get_movie(in_memory_repo):
-    assert in_memory_repo.get_number_of_movies() == 1000
+    assert in_memory_repo.get_number_of_movies() == 14
     assert in_memory_repo.get_movie("Moana") == Movie("Moana", 2016)
 
     in_memory_repo.add_movie(Movie("test", 2020))
     assert in_memory_repo.get_movie("test") == Movie("test", 2020)
-    assert in_memory_repo.get_number_of_movies() == 1001
+    assert in_memory_repo.get_number_of_movies() == 15
 
     assert in_memory_repo.get_movie("test1") == None
 
@@ -28,12 +28,12 @@ def test_get_movies(in_memory_repo):
 
 def test_get_movies_in_genre(in_memory_repo):
     action_movies = in_memory_repo.get_movies_in_genre(Genre("Action"))
-    assert len(action_movies) == 303
+    assert len(action_movies) == 5
     assert len(in_memory_repo.get_movies_in_genre(Genre("Fake genre"))) == 0
 
 def test_get_movies_directed_by(in_memory_repo):
     ron_clements_movies = in_memory_repo.get_movies_directed_by(Director("Ron Clements"))
-    assert len(ron_clements_movies) == 2
+    assert len(ron_clements_movies) == 1
     assert len(in_memory_repo.get_movies_directed_by(Director("fake director"))) == 0
 
 def test_add_and_get_genre(in_memory_repo):

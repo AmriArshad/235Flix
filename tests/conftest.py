@@ -4,7 +4,7 @@ from flix import create_app
 from flix.adapters import memory_repository
 from flix.adapters.memory_repository import MemoryRepository
 
-TEST_DATA_PATH = "flix/datafiles/Data1000Movies.csv"
+TEST_DATA_PATH = "tests/data/movies.csv"
 
 @pytest.fixture
 def in_memory_repo():
