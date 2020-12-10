@@ -13,7 +13,7 @@ Install virtual env and dependencies using requirements.txt.
 From root run in bash:
 ```shell
 $ python -m venv venv
-$ . venv/Scripts/activate
+$ . venv/bin/activate
 $ pip install -r requirements.txt
 ```
 
