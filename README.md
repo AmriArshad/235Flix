@@ -10,7 +10,7 @@ Built a web application that relies on a repository pattern and other architectu
 ## Setup
 Install virtual env and dependencies using requirements.txt.
 
-From root run in bash:
+From root run in terminal:
 ```shell
 $ python -m venv venv
 $ . venv/bin/activate
