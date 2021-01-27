@@ -35,4 +35,16 @@ from root (also making sure venv is activated):
 ```shell
 $ flask run
 ```
-now open localhost:5000 or http://127.0.0.1:5000/
+now open http://127.0.0.1:5000/
+
+## Screenshots
+
+![Home](screenshots/1.png)
+![Register](screenshots/2.png)
+![Login](screenshots/3.png)
+![Browse](screenshots/4.png)
+![BrowseActor](screenshots/5.png)
+![BrowseDirector](screenshots/6.png)
+![BrowseGenre](screenshots/7.png)
+![ReviewEmpty](screenshots/8.png)
+![Review](screenshots/9.png)
